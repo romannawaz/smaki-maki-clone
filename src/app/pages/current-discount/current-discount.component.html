@@ -1,0 +1,86 @@
+<div class="discount_inner" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+  <div class="relative">
+    <div class="container">
+
+      <div class="row discount_content">
+        <div class="col-md-6 col-xl-5 offset-xl-1">
+          <div class="discount_title"><span>Акція тижня</span></div>
+        </div>
+        <div class="col-md-6 col-xl-5 discount_subtitle">
+          <div class="first_section">Доставимо до <span class="time"><span class="text-xxl">29</span> хв</span></div>
+          <div class="second_section">ДАРУЄМО РОЛ АБО ПІЦУ ЗА СПІЗНЕННЯ</div>
+        </div>
+      </div>
+
+      <div class="row discount_offers">
+
+        <div class="col-6 col-lg-5 offset-lg-1 col-xl-4 offset-xl-2">
+          <div class="product">
+            <div class="product_label">-50<sup>%</sup></div>
+            <a href="#" class="product_image">
+              <img class="img" src="assets/images/akciyna_pizza_gavajska.jpg">
+            </a>
+
+            <button type="button" class="like-toggle">
+              <svg class="img" width="24" height="22" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 22">
+                <path class="fill-hover"
+                  d="M20.13697,8.31328c-0.36237,0 -0.6669,-0.28104 -0.6913,-0.64793c-0.10211,-1.5281 -1.3311,-2.75707 -2.85918,-2.85918c-0.38225,-0.02575 -0.67233,-0.35649 -0.64612,-0.7392c0.0253,-0.38225 0.36237,-0.66419 0.73829,-0.64612c2.21939,0.14865 4.00413,1.93383 4.15142,4.15232c0.0253,0.3827 -0.26387,0.71299 -0.64612,0.73874c-0.01544,0.00089 -0.03163,0.00136 -0.047,0.00136z"
+                  fill="#ed3544" fill-opacity="1"></path>
+                <path class="fill-hover"
+                  d="M6.99273,2.53526h0.2503c1.96095,0 3.27984,1.10879 4.04118,2.03911c0.17983,0.21958 0.43828,0.33028 0.73558,0.33932c0.2842,-0.00633 0.55033,-0.14278 0.72067,-0.37005c0.98589,-1.31393 2.37482,-2.00839 4.01768,-2.00839l0.33616,-0.0009c2.53026,0.10527 4.51741,2.09288 4.62224,4.58382v0.37592c0,1.36729 -0.52597,2.6464 -1.48202,3.60199c-0.00362,0.00316 -0.00633,0.00678 -0.00994,0.00994l-8.00147,8.25315c-0.14007,0.13826 -0.30634,0.13916 -0.43511,0.00994l-8.02226,-8.27303c-0.99674,-0.99674 -1.48155,-2.17467 -1.48155,-3.602l-0.00091,-0.21191c0.10482,-2.51308 2.23476,-4.64301 4.70944,-4.74693zM13.54108,20.65773l8.00738,-8.25858c1.30218,-1.30399 2.01878,-3.04579 2.01878,-4.90508l-0.00089,-0.41478c-0.14639,-3.49942 -2.89533,-6.24837 -6.43317,-6.39476h-0.37502c-1.8751,0 -3.50892,0.66148 -4.78218,1.92435c-1.33155,-1.24841 -2.97892,-1.92435 -4.73293,-1.92435l-0.28872,0.0009c-3.50982,0.14594 -6.37399,3.0101 -6.52083,6.55833v0.25031c0,1.91621 0.68091,3.56815 2.01382,4.90059l8.02271,8.27303c0.42742,0.42743 0.9764,0.6425 1.52673,0.6425c0.55345,0 1.10876,-0.21782 1.54432,-0.65246z"
+                  fill="#ed3544" fill-opacity="1"></path>
+              </svg>
+            </button>
+
+            <div class="product_bottom">
+              <div class="product_weight">
+                370г
+              </div>
+              <a class="product_title" href="#">Акційна піца Гавайська</a>
+              <div class="product_icons">
+                <button type="button" class="cart-icon">
+                  <span class="price price-crossed">154 <span class="symbol-price">грн</span></span>
+                  <span class="price price-short">77 <span class="symbol-price">грн</span></span>
+
+                  <img class="img imgLoaded"
+                    src="https://smaki-maki.com/wp-content/themes/smaki/img/icons/icon-card.svg"
+                    data-i-src="https://smaki-maki.com/wp-content/themes/smaki/img/icons/icon-card.svg">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="countdown">
+
+        <div class="countdown-item">
+          <div class="days">6</div>
+          <div class="desc">ДНІВ</div>
+        </div>
+
+        <div class="countdown-item">
+          <div class="days">23</div>
+          <div class="desc">ГОДИН</div>
+        </div>
+
+        <div class="countdown-item">
+          <div class="days">59</div>
+          <div class="desc">ХВИЛИН</div>
+        </div>
+
+        <div class="countdown-item">
+          <div class="days">59</div>
+          <div class="desc">СЕКУНД</div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<button type="button" class="current_discount-line" (click)="collapse.toggle()" [ngClass]="{'active': !isCollapsed}"
+  [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Акції</button>

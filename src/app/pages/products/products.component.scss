@@ -1,0 +1,96 @@
+$dark-grey: #22262a;
+
+*,
+a:hover {
+  color: $dark-grey;
+}
+
+.block-title {
+  margin-bottom: 20px;
+  padding: 0 20px;
+
+  display: block;
+
+  position: relative;
+  z-index: 1;
+
+  font-family: "Caveat Bold";
+
+  text-align: center;
+
+  h1 {
+    font-size: 45px;
+    line-height: 1.2;
+  }
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    height: 30px;
+    width: 100%;
+
+    background-image: url(/assets/images/decor-line-md.svg);
+    background-size: contain;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+  }
+}
+
+.tabs-toggle {
+  display: flex;
+
+  margin-bottom: 40px;
+
+  border-bottom: 1px solid rgba(152, 152, 157, 0.5);
+
+  .tab-menu {
+    position: relative;
+
+    display: block;
+    flex: 1;
+
+    padding: 10px;
+
+    text-align: center;
+
+    font-family: "Montserrat Medium";
+    font-size: 17px;
+    line-height: 1.2;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 100%;
+
+      width: 100%;
+      height: 2px;
+
+      background-color: #ed3544;
+
+      transition: all 0.25s ease;
+      transform-origin: top;
+
+      transform: scaleY(0);
+    }
+
+    &:hover {
+      &::before {
+        transform: scaleY(1);
+      }
+    }
+
+    &.active {
+      font-family: "Montserrat Bold";
+
+      &::before {
+        transform: scaleY(1);
+      }
+    }
+  }
+}

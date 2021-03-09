@@ -1,0 +1,29 @@
+<div class="admin-layout">
+  <mat-toolbar color="primary">
+    <span style="color: #fff">Admin Panel</span>
+
+    <span class="spacer"></span>
+
+    <button mat-flat-button color="warn" (click)="signOut()">Sign Out</button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="menu-container">
+    <mat-sidenav class="sidenav" mode="side" opened>
+      <mat-nav-list class="nav-list">
+        <a mat-list-item class="nav" [routerLink]="[ 'category' ]">Category</a>
+        <a mat-list-item class="nav" [routerLink]="[ 'subcategory' ]">Subcategory</a>
+        <a mat-list-item class="nav" [routerLink]="[ 'product' ]">Product</a>
+
+        <a mat-list-item class="nav to-home" [routerLink]="[ '/' ]">Back to Site</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+</div>

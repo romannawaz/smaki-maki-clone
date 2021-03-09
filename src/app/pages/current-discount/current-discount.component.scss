@@ -1,0 +1,428 @@
+$dark-grey: #22262a;
+$light-red: #ed3544;
+
+.discount_inner {
+  height: auto;
+  padding-top: 14px;
+  padding-bottom: 25px;
+
+  background: url(/assets/images/current-discount-bg.jpg) no-repeat bottom;
+  background-size: 100% 100%;
+
+  .discount_content {
+    font-family: "Caveat Regular";
+
+    color: #fff;
+
+    .discount_title {
+      display: inline-block;
+
+      margin-bottom: 15px;
+      margin-left: 40px;
+
+      font-size: 41px;
+    }
+
+    .discount_subtitle {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+
+      .first_section {
+        font-family: "Caveat Regular";
+        font-size: 40px;
+
+        flex-shrink: 0;
+
+        .time {
+          font-family: "Montserrat Bold";
+          font-size: 40px;
+        }
+      }
+
+      .second_section {
+        width: 40%;
+
+        font-family: "Montserrat Regular";
+
+        margin-bottom: 16px;
+        margin-left: 10px;
+
+        text-transform: uppercase;
+
+        font-size: 15px;
+        line-height: 1.2em;
+      }
+    }
+  }
+}
+
+.product {
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  height: 100%;
+
+  padding-top: 0;
+  padding-bottom: 20px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  background-color: #fff;
+
+  &:hover {
+    .product_image img {
+      transform: scale(1.1);
+    }
+  }
+
+  .product_label {
+    display: block;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    font-size: 17px;
+    line-height: 18px;
+
+    padding: 11px 45px 9px 10px;
+
+    font-family: "Montserrat Bold";
+    font-size: 17px;
+
+    color: #fff;
+
+    z-index: 1;
+
+    height: 70px;
+
+    border-top-left-radius: 10px;
+
+    sup {
+      top: -0.3em;
+    }
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      right: -20px;
+      top: 0;
+
+      width: 200%;
+      height: 200%;
+
+      background-color: #ed3544;
+
+      transform-origin: right top;
+
+      transform: skewX(-59deg);
+
+      z-index: -1;
+    }
+  }
+
+  .like-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 43px;
+    height: 43px;
+
+    transition: all 0.25s ease;
+
+    svg {
+      margin-top: 2px;
+      position: relative;
+    }
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 66px;
+      height: 65px;
+
+      transform: translate(-50%, -50%);
+
+      background-image: url(/assets/icons/icon-hurt-bg-white.svg);
+
+      background-repeat: no-repeat;
+      transform-origin: center;
+
+      transition: all 0.25s ease;
+    }
+  }
+
+  .product_image {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    img {
+      transition: all 0.25s ease;
+    }
+  }
+
+  .product_bottom {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    height: auto;
+
+    padding: 0 18px;
+
+    .product_weight {
+      margin-bottom: 5px;
+
+      font-family: "Montserrat Medium";
+      font-size: 13px;
+
+      line-height: 16px;
+
+      color: #98989d;
+    }
+
+    .product_title {
+      font-family: "Montserrat Bold";
+
+      display: inline-block;
+
+      position: relative;
+
+      margin-bottom: 0;
+      padding-right: 65px;
+
+      max-width: 100%;
+      max-height: 36px;
+
+      font-size: 15px;
+      line-height: 18px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      color: $dark-grey;
+
+      transition: all 0.25s ease;
+
+      &:hover {
+        color: $light-red;
+      }
+    }
+
+    .product_icons {
+      position: relative;
+      bottom: 20px;
+
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+
+      height: 17px;
+
+      .cart-icon {
+        position: relative;
+        bottom: -25px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        margin-left: 8px;
+
+        width: 70px;
+        height: 70px;
+
+        transition: all 0.25s ease;
+
+        color: #fff;
+
+        font-size: 17px;
+        text-align: center;
+
+        &:before {
+          content: "";
+
+          position: absolute;
+          top: 50%;
+          left: 50%;
+
+          width: 92px;
+          height: 93px;
+
+          transform: translate(-50%, -50%);
+          transform-origin: center;
+
+          background: url(/assets/icons/icon-cart-bg.svg);
+
+          background-size: 100% 100%;
+        }
+
+        .price-crossed {
+          display: block;
+
+          position: relative;
+
+          margin: 0 0 0 15px;
+
+          font-family: "Montserrat Medium";
+          font-size: 14px;
+
+          text-decoration: line-through;
+
+          .symbol-price {
+            font-size: 12px;
+          }
+        }
+
+        .price-short {
+          position: relative;
+
+          display: block;
+
+          // margin: 5px 0 2px;
+
+          font-family: "Montserrat Bold";
+          font-size: 17px;
+
+          .symbol-price {
+            font-size: 12px;
+          }
+        }
+
+        img {
+          position: relative;
+          width: 18px;
+          height: auto;
+          transition: all 0.25s ease;
+        }
+      }
+    }
+  }
+}
+
+.countdown {
+  margin-top: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  &-item {
+    margin: 0 3px;
+
+    display: inline-block;
+    min-width: 50px;
+
+    font-size: 27px;
+    text-align: center;
+
+    font-family: "Montserrat Bold";
+    color: #fff;
+
+    .desc {
+      margin-top: -5px;
+      font-size: 9px;
+    }
+  }
+}
+
+.current_discount-line {
+  cursor: pointer;
+
+  position: relative;
+  z-index: 0;
+
+  margin-bottom: 40px;
+  padding-top: 2px;
+
+  width: 100%;
+  height: 22px;
+
+  background-color: #ed3544;
+
+  font-family: "Montserrat Bold";
+  font-size: 15px;
+  letter-spacing: 1.2px;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #fff;
+
+  box-shadow: 0 3px 12px rgb(0 0 0 / 10%);
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    top: 0;
+
+    width: 94px;
+    height: 48px;
+
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+
+    transform: translateX(-50%);
+    background-color: #ed3544;
+
+    z-index: -1;
+
+    transition: all 0.25s ease;
+  }
+
+  &.active::after {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  &:after {
+    content: "";
+
+    position: absolute;
+    top: 26px;
+    left: 50%;
+
+    width: 15px;
+    height: 12px;
+
+    transition: transform 0.25s ease;
+
+    transform: translateX(-50%) rotate(180deg);
+
+    background-image: url(/assets/icons/icon-discount-arrow.svg);
+    background-size: 100%;
+  }
+
+  &:hover {
+    &:before {
+      transform: translate(-50%, 3px);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<div class="admin-login-layout">
+  <div class="wrapper">
+    <div class="login-form">
+      <form>
+
+        <div class="form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter login</mat-label>
+            <input type="text" matInput [formControl]="email" required>
+
+            <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter password</mat-label>
+            <input type="password" matInput [formControl]="password" required>
+
+            <mat-error *ngIf="password.invalid">{{ getErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-stroked-button class="submit-btn" (click)="signIn()">Sign In</button>
+
+      </form>
+    </div>
+  </div>
+</div>

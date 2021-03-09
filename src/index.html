@@ -1,13 +1,40 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>SmakiMaki</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style>
+    /* Scrollbar Style */
+    html:not(.touch-screen) ::-webkit-scrollbar,
+    html:not(.touch-screen)::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    html:not(.touch-screen) ::-webkit-scrollbar-thumb,
+    html:not(.touch-screen)::-webkit-scrollbar-thumb {
+      background: #ed3544;
+    }
+
+    html:not(.touch-screen) ::-webkit-scrollbar-track,
+    html:not(.touch-screen)::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>

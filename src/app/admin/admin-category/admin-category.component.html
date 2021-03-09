@@ -1,0 +1,67 @@
+<div class="wrapper">
+  <form class="form" (submit)="addCategory()">
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="name" name="name">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Url Name</mat-label>
+      <input matInput [(ngModel)]="urlName" name="urlName">
+    </mat-form-field>
+
+    <div class="custom-file full-width">
+      <input type="file" class="custom-file-input  mb-1" id="inputIcon" (change)="uploadFile($event, 'icons')"
+        [(ngModel)]="fileInput" name="fileInput">
+      <label class="custom-file-label" for="inputIcon">Choose file</label>
+
+      <mat-progress-bar mode="determinate" [value]="(uploadPercentIcon | async)"></mat-progress-bar>
+    </div>
+
+    <button mat-stroked-button type="submit" class="full-width">Add new category</button>
+  </form>
+
+  <table mat-table class="mat-elevation-z8" [dataSource]="categories">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="urlName">
+      <th mat-header-cell *matHeaderCellDef>Link value</th>
+      <td mat-cell *matCellDef="let element"> {{element.urlName}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="icon">
+      <th mat-header-cell *matHeaderCellDef>Icon</th>
+      <td mat-cell *matCellDef="let element">
+        <img [src]="element.icon" style="background: #000;">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="element">
+      <th mat-header-cell *matHeaderCellDef>Edit</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- {{ element.id }} -->
+
+        <button mat-flat-button color="primary" (click)="updateCategory(element)">Edit</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Delete</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- {{ element.id }} -->
+
+        <button mat-flat-button color="warn" (click)="deleteCategory(element.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

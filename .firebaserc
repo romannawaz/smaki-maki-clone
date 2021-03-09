@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "smaki-maki-9b8d3": {
+      "hosting": {
+        "smaki-maki": [
+          "smaki-maki-9b8d3"
+        ]
+      }
+    }
+  }
+}

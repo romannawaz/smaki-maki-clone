@@ -21,6 +21,10 @@ export class CategoryService {
     return this.categoryRef;
   }
 
+  getFireCloudCategoryByUrlName(urlName: string): AngularFirestoreCollection<ICategory> {
+    return this.db.collection(this.dbPath, ref => ref.where('urlName', '==', urlName));
+  }
+
   addFireCloudCategory(category: ICategory): Promise<DocumentReference<ICategory>> {
     return this.categoryRef.add({ ...category });
   }

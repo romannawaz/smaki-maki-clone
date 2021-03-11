@@ -21,6 +21,14 @@ export class SubcategoryService {
     return this.subcategoryRef;
   }
 
+  getFireCloudSubcategoriesByCategoryID(categoryID: string): AngularFirestoreCollection<ISubcategory> {
+    return this.db.collection(this.dbPath, ref => ref.where('categoryID', '==', categoryID));
+  }
+
+  getFireCloudSubcategoryByUrlName(urlName: string): AngularFirestoreCollection<ISubcategory> {
+    return this.db.collection(this.dbPath, ref => ref.where('urlName', '==', urlName));
+  }
+
   addFireCloudSubcategory(subcategory: ISubcategory): Promise<DocumentReference<ISubcategory>> {
     return this.subcategoryRef.add({ ...subcategory });
   }

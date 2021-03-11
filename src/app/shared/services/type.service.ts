@@ -20,6 +20,10 @@ export class TypeService {
     return this.typeRef;
   }
 
+  getFireCloudTypesBySubcategoryID(subcategoryID: string): AngularFirestoreCollection<IType> {
+    return this.db.collection(this.dbPath, ref => ref.where('subcategoryID', '==', subcategoryID));
+  }
+
   addFireCloudType(type: IType): Promise<DocumentReference<IType>> {
     return this.typeRef.add({ ...type });
   }

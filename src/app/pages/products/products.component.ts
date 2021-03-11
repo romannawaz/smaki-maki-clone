@@ -17,11 +17,10 @@ export class ProductsComponent implements OnInit {
 
   currentProductPage: string;
 
-  categoryID: string;
-
   currentCategory: ICategory;
+  currentSubcategory: ISubcategory;
+
   currentSubcategoryURL: string;
-  currentSubcategoryID: string;
 
   subcategories: ISubcategory[] = [];
   types: IType[] = [];
@@ -40,14 +39,13 @@ export class ProductsComponent implements OnInit {
         if (e instanceof NavigationEnd) {
           this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
 
-          // if (activatedRoute.firstChild) {
-          //   activatedRoute.firstChild.params
-          //     .subscribe(url => {
-          //       this.currentSubcategoryURL = url.subcategory;
-          //       console.log(this.currentSubcategoryURL);
-          //     })
-          //     .unsubscribe();
-          // }
+          if (activatedRoute.firstChild) {
+            activatedRoute.firstChild.params
+              .subscribe(url => {
+                this.currentSubcategoryURL = url.subcategory;
+              })
+              .unsubscribe();
+          }
 
           this.getCurrentCategory();
         }
@@ -57,51 +55,102 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void { }
 
   getCurrentCategory(): void {
-    this.categoryService.getFireCloudCategories()
+    // this.categoryService.getFireCloudCategories()
+    //   .snapshotChanges()
+    //   .pipe(
+    //     map(changes => changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() })))
+    //   )
+    //   .subscribe(data => {
+    //     this.currentCategory = data.filter(cat => cat.urlName == this.currentProductPage)[0];
+
+    //     if (this.categoryID != this.currentCategory.id) {
+    //       this.categoryID = this.currentCategory.id;
+
+    //       this.getSubcategories();
+
+
+    //     }
+    //   });
+
+    this.categoryService.getFireCloudCategoryByUrlName(this.currentProductPage)
+      .snapshotChanges()
+      .pipe(
+        map(changes => changes.map(cat => ({ id: cat.payload.doc.id, ...cat.payload.doc.data() })))
+      )
+      .subscribe(data => {
+        if (this.currentCategory != data[0]) {
+          this.currentCategory = data[0];
+
+          this.getSubcategoriesByCategoryID();
+        }
+      });
+  }
+
+  getSubcategoriesByCategoryID() {
+    this.subcategoryService.getFireCloudSubcategoriesByCategoryID(this.currentCategory.id)
       .snapshotChanges()
       .pipe(
         map(changes => changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() })))
       )
       .subscribe(data => {
-        this.currentCategory = data.filter(cat => cat.urlName == this.currentProductPage)[0];
+        this.subcategories = data;
 
-        if (this.categoryID != this.currentCategory.id) {
-          this.categoryID = this.currentCategory.id;
-
-          this.getSubcategories();
-        }
+        this.getCurrentSubcategoryByUrlName();
       });
   }
 
-  getSubcategories(): void {
-    this.subcategoryService.getFireCloudSubcategories()
+  // getSubcategories(): void {
+  //   this.subcategoryService.getFireCloudSubcategories()
+  //     .snapshotChanges()
+  //     .pipe(
+  //       map(changes => {
+  //         return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
+  //       })
+  //     )
+  //     .subscribe(data => {
+  //       this.subcategories = data.filter(cat => cat.categoryID == this.categoryID);
+  //       this.getTypes();
+
+  //       if (this.subcategories.length > 1) {
+  //         this.route.navigateByUrl(`/products/${this.currentProductPage}/${this.subcategories[0].urlName}`);
+  //       }
+  //     });
+  // }
+
+  getCurrentSubcategoryByUrlName(): void {
+    this.subcategoryService.getFireCloudSubcategoryByUrlName(this.currentSubcategoryURL)
       .snapshotChanges()
       .pipe(
-        map(changes => {
-          return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
-        })
+        map(changes => changes.map(subcat => ({ id: subcat.payload.doc.id, ...subcat.payload.doc.data() })))
       )
       .subscribe(data => {
-        this.subcategories = data.filter(cat => cat.categoryID == this.categoryID);
-        this.getTypes();
+        this.currentSubcategory = data[0];
 
-        if (this.subcategories.length > 1) {
-          this.route.navigateByUrl(`/products/${this.currentProductPage}/${this.subcategories[0].urlName}`);
-        }
+        this.getTypes();
       });
   }
 
   getTypes(): void {
-    this.typeService.getFireCloudTypes()
+    // this.typeService.getFireCloudTypes()
+    //   .snapshotChanges()
+    //   .pipe(
+    //     map(changes => {
+    //       return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
+    //     })
+    //   )
+    //   .subscribe(data => {
+    //     this.types = data;
+    //     // console.log(this.types);
+    //   });
+
+    this.typeService.getFireCloudTypesBySubcategoryID(this.currentSubcategory.id)
       .snapshotChanges()
       .pipe(
-        map(changes => {
-          return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
-        })
+        map(changes => changes.map(type => ({ id: type.payload.doc.id, ...type.payload.doc.data() })))
       )
       .subscribe(data => {
         this.types = data;
-        console.log(this.types);
+        console.log(data);
       });
   }
 }

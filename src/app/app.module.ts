@@ -30,6 +30,7 @@ import { WrapperProductsComponent } from './pages/wrapper-products/wrapper-produ
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
+import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
 
 // Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -62,6 +63,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AdminSubcategoryComponent,
     ProductsComponent,
     WrapperProductsComponent,
+    AdminTypeComponent,
   ],
   imports: [
     BrowserModule,

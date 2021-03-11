@@ -4,7 +4,6 @@ $light-red: #ed3544;
 .discount_inner {
   height: auto;
   padding-top: 14px;
-  padding-bottom: 25px;
 
   background: url(/assets/images/current-discount-bg.jpg) no-repeat bottom;
   background-size: 100% 100%;
@@ -423,6 +422,12 @@ $light-red: #ed3544;
   &:hover {
     &:before {
       transform: translate(-50%, 3px);
+    }
+  }
+
+  &.active:hover {
+    &:before {
+      transform: translate(-50%, -3px);
     }
   }
 }

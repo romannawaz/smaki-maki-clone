@@ -7,14 +7,24 @@
         <h1>Доставка {{ currentCategory ? currentCategory.name.toLowerCase() : '' }} у Львові</h1>
       </div>
 
-      <div class="tabs-toggle" *ngIf="subcategories">
+      <div class="tabs-toggle" *ngIf="subcategories && subcategories.length > 1">
         <a class="tab-menu" *ngFor="let subcategory of subcategories" [routerLink]="[ subcategory.urlName ]"
           routerLinkActive="active">{{ subcategory.name }}</a>
       </div>
 
       <form>
         <div class="page-sort">
+          <div class="checkbox-thumb-wrap">
+            <label class="checkbox-thumb">
+              <input type="radio" name="product-filter" value="all" checked>
+              <span>Всi</span>
+            </label>
 
+            <label class="checkbox-thumb" *ngFor="let type of types">
+              <input type="radio" name="product-filter" [value]="type.id">
+              <span>{{ type.name }}</span>
+            </label>
+          </div>
         </div>
       </form>
 

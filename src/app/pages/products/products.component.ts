@@ -3,8 +3,10 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
 import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
+import { IType } from 'src/app/shared/interfaces/type.interface';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
+import { TypeService } from 'src/app/shared/services/type.service';
 
 @Component({
   selector: 'app-products',
@@ -19,12 +21,17 @@ export class ProductsComponent implements OnInit {
 
   currentCategory: ICategory;
   currentSubcategoryURL: string;
+  currentSubcategoryID: string;
 
   subcategories: ISubcategory[] = [];
+  types: IType[] = [];
+
+  currentFilter: string;
 
   constructor(
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
+    private typeService: TypeService,
     private activatedRoute: ActivatedRoute,
     private route: Router
   ) {
@@ -76,10 +83,25 @@ export class ProductsComponent implements OnInit {
       )
       .subscribe(data => {
         this.subcategories = data.filter(cat => cat.categoryID == this.categoryID);
+        this.getTypes();
 
         if (this.subcategories.length > 1) {
           this.route.navigateByUrl(`/products/${this.currentProductPage}/${this.subcategories[0].urlName}`);
         }
+      });
+  }
+
+  getTypes(): void {
+    this.typeService.getFireCloudTypes()
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
+        })
+      )
+      .subscribe(data => {
+        this.types = data;
+        console.log(this.types);
       });
   }
 }

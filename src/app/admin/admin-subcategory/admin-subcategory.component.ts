@@ -71,8 +71,6 @@ export class AdminSubcategoryComponent implements OnInit {
   addNewSubcategory(): void {
     const newSubcategory = new Subcategory(this.categoryID, this.name, this.urlName);
 
-    console.log(newSubcategory);
-
     if (!this.updateStatus) {
       this.subcategoryService.addFireCloudSubcategory(newSubcategory)
         .then(() => {

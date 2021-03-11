@@ -57,7 +57,7 @@ export class AdminCategoryComponent implements OnInit {
       });
   }
 
-  addCategory(): void {
+  addNewCategory(): void {
     const newCategory = new Category(this.name, this.urlName, this.pathToIcon);
 
     if (!this.updateStatus) {

@@ -128,6 +128,10 @@ $light-red: #ed3544;
               &:hover {
                 color: #ed3544;
               }
+
+              &.active {
+                color: #ed3544;
+              }
             }
           }
         }

@@ -16,6 +16,8 @@ import { map } from 'rxjs/operators';
 })
 export class AdminTypeComponent implements OnInit {
 
+  displayedColumns: string[] = ['name', 'subcategoryID', 'element', 'id'];
+
   subcategories: ISubcategory[] = [];
   types: IType[] = [];
 
@@ -30,6 +32,11 @@ export class AdminTypeComponent implements OnInit {
   ngOnInit(): void {
     this.getSubcategories();
     this.getTypes();
+  }
+
+  resetForm(): void {
+    this.subcategoryID = null;
+    this.name = null;
   }
 
   getSubcategories(): void {
@@ -62,7 +69,16 @@ export class AdminTypeComponent implements OnInit {
     let newType = new ProductType(this.subcategoryID, this.name);
 
     this.typeService.addFireCloudType(newType);
-    console.log(newType);
+
+    this.resetForm();
+  }
+
+  updateType(): void { }
+
+  deleteType(id: string): void {
+    this.typeService.deleteFireCloudType(id)
+      .then(() => this.getTypes())
+      .catch(error => console.log(error));
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 
 import { ISubcategory } from '../interfaces/subcategory.interface';
 
@@ -25,8 +25,8 @@ export class SubcategoryService {
     return this.db.collection(this.dbPath, ref => ref.where('categoryID', '==', categoryID));
   }
 
-  getFireCloudSubcategoryByUrlName(urlName: string): AngularFirestoreCollection<ISubcategory> {
-    return this.db.collection(this.dbPath, ref => ref.where('urlName', '==', urlName));
+  getFireCloudSubcategoryByID(id: string): AngularFirestoreDocument<ISubcategory> {
+    return this.subcategoryRef.doc(id);
   }
 
   addFireCloudSubcategory(subcategory: ISubcategory): Promise<DocumentReference<ISubcategory>> {

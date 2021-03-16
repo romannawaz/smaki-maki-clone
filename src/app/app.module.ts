@@ -26,7 +26,6 @@ import { ProductsComponent } from './pages/products/products.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminProductComponent } from './admin/admin-product/admin-product.component';
-import { WrapperProductsComponent } from './pages/wrapper-products/wrapper-products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
@@ -42,9 +41,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -62,8 +63,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AdminCategoryComponent,
     AdminSubcategoryComponent,
     ProductsComponent,
-    WrapperProductsComponent,
     AdminTypeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +83,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatListModule,
     MatProgressBarModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

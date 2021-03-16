@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Subcategory } from 'src/app/shared/models/subcategory.model';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
 import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-subcategory',
@@ -15,17 +16,21 @@ import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
 })
 export class AdminSubcategoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'urlName', 'categoryID', 'element', 'id'];
+  toppings = new FormControl();
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
+  displayedColumns: string[] = ['name', 'categoryID', 'update', 'delete'];
 
   categories: ICategory[] = [];
   subcategories: ISubcategory[] = [];
 
   name: string;
-  urlName: string;
   categoryID: string;
 
   updatedElementID: string;
   updateStatus: boolean;
+
+  categoryArray: any[] = [];
 
   constructor(
     private categoryService: CategoryService,
@@ -36,6 +41,10 @@ export class AdminSubcategoryComponent implements OnInit {
     this.getCategories();
     this.getSubcategories();
   }
+
+  // checkTopping(): void {
+  //   console.log(this.toppings.value);
+  // }
 
   resetForm(): void {
     this.name = null;
@@ -52,6 +61,7 @@ export class AdminSubcategoryComponent implements OnInit {
       )
       .subscribe(data => {
         this.categories = data;
+        this.categoryArray = data;
       });
   }
 
@@ -65,11 +75,21 @@ export class AdminSubcategoryComponent implements OnInit {
       )
       .subscribe(data => {
         this.subcategories = data;
+
+        this.categoryArray.map(el => el.subcategories = []);
+
+        data.map(item => {
+          let categoryIndex = this.categories.findIndex(cat => cat.id == item.categoryID);
+
+          if (categoryIndex != -1) {
+            this.categoryArray[categoryIndex].subcategories.push(item);
+          }
+        });
       });
   }
 
   addNewSubcategory(): void {
-    const newSubcategory = new Subcategory(this.categoryID, this.name, this.urlName);
+    const newSubcategory = new Subcategory(this.categoryID, this.name);
 
     if (!this.updateStatus) {
       this.subcategoryService.addFireCloudSubcategory(newSubcategory)

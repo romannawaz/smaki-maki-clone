@@ -1,0 +1,358 @@
+.wrapper {
+  margin-top: 80px;
+
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.footer_top {
+  position: relative;
+  font-size: 15px;
+
+  .footer_top-bg {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: #f2f2f2;
+  }
+}
+
+.footer_top-content {
+  padding: 50px 0;
+  margin-top: 50px;
+
+  .decor-img-footer {
+    position: absolute;
+    left: 0;
+    bottom: -40px;
+
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    vertical-align: top;
+
+    pointer-events: none;
+  }
+}
+
+.icon-list {
+  font-family: "Montserrat Medium";
+
+  li {
+    position: relative;
+
+    margin-bottom: 40px;
+
+    padding-left: 50px;
+    padding-top: 5px;
+
+    .img {
+      position: absolute;
+      top: 4px;
+      left: 0;
+
+      max-width: 23px;
+    }
+
+    div {
+      font-size: 17px;
+
+      .h6 {
+        margin-bottom: 0;
+        line-height: 1.375;
+
+        b {
+          font-family: "Montserrat Bold";
+        }
+      }
+      a {
+        font-size: 15px;
+        color: #22262a;
+      }
+    }
+  }
+}
+
+.footer_top-nav {
+  margin-top: 10px;
+
+  li {
+    margin-bottom: 17px;
+
+    a {
+      cursor: pointer;
+
+      font-family: "Montserrat Medium";
+      font-size: 15px;
+
+      color: #22262a;
+
+      &.active {
+        color: #ed3544;
+      }
+    }
+  }
+}
+
+.subscribe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px 30px;
+
+  position: relative;
+
+  border-radius: 10px;
+  box-shadow: -5px 0 10px rgb(0 0 0 / 20%);
+  background: url(/assets/images/footer-subscribe.png);
+  background-size: 100% 100%;
+
+  color: #fff;
+
+  .decor_title {
+    display: block;
+
+    position: relative;
+    z-index: 1;
+
+    font-family: "Caveat Bold";
+
+    margin-bottom: 5px;
+    padding: 0 20px;
+
+    text-align: center;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      height: 30px;
+      width: 100%;
+
+      background-image: url(/assets/images/decor-line-lg.svg);
+      background-size: contain;
+      background-position: bottom center;
+
+      z-index: -1;
+
+      background-repeat: no-repeat;
+    }
+
+    .h2 {
+      margin-bottom: 0;
+
+      font-size: 45px;
+      line-height: 1.2;
+    }
+  }
+
+  .subtitle {
+    display: block;
+
+    align-self: flex-end;
+
+    margin-right: 45px;
+
+    text-align: right;
+
+    font-family: "Montserrat Medium";
+    font-size: 15px;
+
+    text-transform: uppercase;
+    line-height: 1.2em;
+  }
+}
+
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 320px;
+  margin: 30px 0 0;
+
+  .input-wrapper {
+    position: relative;
+
+    display: block;
+
+    margin-bottom: 25px;
+
+    width: 100%;
+
+    text-align: left;
+
+    &.focus {
+      .floating-label {
+        font-size: 11px;
+        transform: translate(0, 0);
+      }
+    }
+
+    .floating-label {
+      pointer-events: none;
+
+      display: inline-block;
+
+      max-width: 100%;
+      font-size: 15px;
+      font-family: "Montserrat Medium";
+
+      position: absolute;
+      left: 8px;
+      top: 100%;
+
+      line-height: 18px;
+
+      color: #fff;
+
+      transform: translate(0, -24px);
+      transition: all 0.25s ease;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .your_email {
+      input {
+        font-size: 15px;
+        line-height: 30px;
+        text-overflow: ellipsis;
+
+        font-family: "Montserrat Medium";
+
+        width: 100%;
+        height: 30px;
+
+        margin: 0;
+        padding: 0 8px;
+
+        background: 0 0;
+        border-radius: 0;
+        border-bottom: 1px solid #fff;
+
+        overflow: hidden;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.footer_bottom {
+  position: relative;
+
+  padding: 20px 0;
+
+  font-family: "Montserrat Light";
+  font-size: 13px;
+  line-height: 1.2;
+
+  color: #fff;
+
+  background-color: #ed3544;
+
+  *:hover {
+    color: #fff;
+  }
+
+  .scroll-top {
+    cursor: pointer;
+
+    position: absolute;
+    top: -66px;
+    right: 180px;
+
+    width: 56px;
+    height: 56px;
+
+    border-radius: 50%;
+    background-color: #ed3544;
+
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+
+    transition: all 0.25s ease;
+
+    z-index: 10;
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      width: 20px;
+      height: 20px;
+
+      &::before {
+        content: "";
+
+        position: absolute;
+        top: 6px;
+        left: 4px;
+
+        width: 12px;
+        height: 12px;
+
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+
+        transform: rotate(135deg);
+        z-index: 2;
+      }
+    }
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+
+    .coryright {
+      margin-right: 40px;
+    }
+  }
+}
+
+.footer_bottom-nav {
+  ul {
+    li {
+      display: inline-block;
+      margin-right: 60px;
+
+      a {
+        text-decoration: underline;
+
+        color: #fff;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.dev {
+  margin-left: auto;
+  flex-shrink: 0;
+
+  .img {
+    vertical-align: middle;
+    margin-left: 5px;
+    height: 23px;
+  }
+}

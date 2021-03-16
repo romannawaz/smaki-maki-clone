@@ -12,7 +12,6 @@ import { ProductsComponent } from './pages/products/products.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminProductComponent } from './admin/admin-product/admin-product.component';
-import { WrapperProductsComponent } from './pages/wrapper-products/wrapper-products.component';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
 import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
@@ -27,11 +26,7 @@ const routes: Routes = [
   { path: 'discount', component: DiscountComponent },
   { path: 'vacancies', component: VacanciesComponent },
   { path: 'admin-login', component: AdminLoginComponent },
-  {
-    path: 'products/:category', component: ProductsComponent, children: [
-      { path: ':subcategory', component: WrapperProductsComponent }
-    ]
-  },
+  { path: 'products/:category', component: ProductsComponent },
   {
     path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
       { path: '', pathMatch: 'full', redirectTo: 'category' },

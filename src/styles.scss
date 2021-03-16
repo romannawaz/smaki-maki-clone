@@ -5,24 +5,42 @@
 
 .container {
   width: 100%;
-  
+
   padding-right: 15px;
   padding-left: 15px;
 
   margin-right: auto;
   margin-left: auto;
 
-  
   @media (min-width: 992px) {
     max-width: 1520px;
 
     padding-left: 60px;
     padding-right: 60px;
   }
-
 }
 
-* {
+html,
+.body {
+  height: 100%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
 
@@ -78,4 +96,41 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+//===================
+
+.btn-red {
+  cursor: pointer;
+  display: inline-block;
+
+  min-width: 240px;
+
+  padding: 15px 25px;
+
+  vertical-align: bottom;
+
+  text-align: center;
+
+  position: relative;
+
+  text-decoration: none;
+
+  font-family: "Montserrat Bold";
+  font-size: 13px;
+  line-height: 18px;
+
+  color: #fff;
+
+  background: #ed3544;
+  border-radius: 28px;
+  border: 1px solid #ed3544;
+
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+
+  &:hover {
+    background: #fff;
+    color: #ed3544;
+  }
 }

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
 import { IType } from 'src/app/shared/interfaces/type.interface';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
 import { TypeService } from 'src/app/shared/services/type.service';
 
@@ -20,70 +23,64 @@ export class ProductsComponent implements OnInit {
   currentCategory: ICategory;
   currentSubcategory: ISubcategory;
 
-  currentSubcategoryURL: string;
-
   subcategories: ISubcategory[] = [];
   types: IType[] = [];
 
-  currentFilter: string;
+  subcategoryFormGroup: FormGroup;
+  filter: FormGroup;
+
+  products: IProduct[] = [];
 
   constructor(
+    private fb: FormBuilder,
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
     private typeService: TypeService,
+    private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private route: Router
   ) {
     this.route.events
       .subscribe(e => {
         if (e instanceof NavigationEnd) {
+          this.subcategories = null;
+          this.types = null;
+          this.products = null;
+
+          this.subcategoryFormGroup.value.subcategory = null;
+
           this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
 
-          if (activatedRoute.firstChild) {
-            activatedRoute.firstChild.params
-              .subscribe(url => {
-                this.currentSubcategoryURL = url.subcategory;
-              })
-              .unsubscribe();
-          }
-
           this.getCurrentCategory();
+
+          this.filter = this.fb.group({
+            productFilter: ['all', Validators.required]
+          });
         }
       });
+
+    this.subcategoryFormGroup = this.fb.group({
+      subcategory: ['', Validators.required]
+    });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getCurrentCategory();
+  }
 
   getCurrentCategory(): void {
-    // this.categoryService.getFireCloudCategories()
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map(changes => changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() })))
-    //   )
-    //   .subscribe(data => {
-    //     this.currentCategory = data.filter(cat => cat.urlName == this.currentProductPage)[0];
-
-    //     if (this.categoryID != this.currentCategory.id) {
-    //       this.categoryID = this.currentCategory.id;
-
-    //       this.getSubcategories();
-
-
-    //     }
-    //   });
-
     this.categoryService.getFireCloudCategoryByUrlName(this.currentProductPage)
-      .snapshotChanges()
-      .pipe(
-        map(changes => changes.map(cat => ({ id: cat.payload.doc.id, ...cat.payload.doc.data() })))
-      )
-      .subscribe(data => {
-        if (this.currentCategory != data[0]) {
-          this.currentCategory = data[0];
+    .snapshotChanges()
+    .pipe(
+      map(changes => changes.map(cat => ({ id: cat.payload.doc.id, ...cat.payload.doc.data() })))
+    )
+    .subscribe(data => {
+      if (this.currentCategory != data[0]) {
+        this.currentCategory = data[0];
 
-          this.getSubcategoriesByCategoryID();
-        }
-      });
+        this.getSubcategoriesByCategoryID();
+      }
+    });
   }
 
   getSubcategoriesByCategoryID() {
@@ -93,64 +90,97 @@ export class ProductsComponent implements OnInit {
         map(changes => changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() })))
       )
       .subscribe(data => {
-        this.subcategories = data;
+        if (data) {
+          if (data.length > 0) {
+            this.subcategories = data;
 
-        this.getCurrentSubcategoryByUrlName();
+            this.subcategoryFormGroup = this.fb.group({
+              subcategory: [this.subcategories[0].id, Validators.required]
+            });
+
+            this.getCurrentSubcategory();
+          }
+          else {
+            this.getProductsByCategoryID();
+          }
+        }
       });
   }
 
-  // getSubcategories(): void {
-  //   this.subcategoryService.getFireCloudSubcategories()
-  //     .snapshotChanges()
-  //     .pipe(
-  //       map(changes => {
-  //         return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
-  //       })
-  //     )
-  //     .subscribe(data => {
-  //       this.subcategories = data.filter(cat => cat.categoryID == this.categoryID);
-  //       this.getTypes();
+  getCurrentSubcategory(): void {
+    this.products = null;
+    this.types = null;
 
-  //       if (this.subcategories.length > 1) {
-  //         this.route.navigateByUrl(`/products/${this.currentProductPage}/${this.subcategories[0].urlName}`);
-  //       }
-  //     });
-  // }
-
-  getCurrentSubcategoryByUrlName(): void {
-    this.subcategoryService.getFireCloudSubcategoryByUrlName(this.currentSubcategoryURL)
-      .snapshotChanges()
+    this.subcategoryService.getFireCloudSubcategoryByID(this.subcategoryFormGroup.value.subcategory)
+      .get()
       .pipe(
-        map(changes => changes.map(subcat => ({ id: subcat.payload.doc.id, ...subcat.payload.doc.data() })))
+        map(changes => ({ id: changes.id, ...changes.data() }))
       )
       .subscribe(data => {
-        this.currentSubcategory = data[0];
+        this.currentSubcategory = data;
 
         this.getTypes();
       });
+
   }
 
   getTypes(): void {
-    // this.typeService.getFireCloudTypes()
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map(changes => {
-    //       return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
-    //     })
-    //   )
-    //   .subscribe(data => {
-    //     this.types = data;
-    //     // console.log(this.types);
-    //   });
-
     this.typeService.getFireCloudTypesBySubcategoryID(this.currentSubcategory.id)
       .snapshotChanges()
       .pipe(
         map(changes => changes.map(type => ({ id: type.payload.doc.id, ...type.payload.doc.data() })))
       )
       .subscribe(data => {
-        this.types = data;
-        console.log(data);
+        if (data.length > 0) {
+          this.types = data;
+
+          this.getProductsByType();
+        }
+        else {
+          this.getProductBySubcategoryID();
+        }
       });
+  }
+
+  // -----------
+
+  getProductsByCategoryID(): void {
+    this.productService.getFireCloudProductsByCategoryID(this.currentCategory.id)
+      .snapshotChanges()
+      .pipe(
+        map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
+      )
+      .subscribe(data => {
+        this.products = data;
+      });
+  }
+
+  getProductBySubcategoryID(): void {
+    this.productService.getFireCloudProductsBySubcategoryID(this.subcategoryFormGroup.value.subcategory)
+      .snapshotChanges()
+      .pipe(
+        map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
+      )
+      .subscribe(data => {
+        this.products = data;
+      });
+  }
+
+  getProductsByType(): void {
+    this.products = null;
+
+    if (this.filter.value.productFilter === 'all') {
+      this.getProductBySubcategoryID();
+    }
+    else {
+      this.productService.getFireCloudProductsByTypeID(this.filter.value.productFilter)
+        .snapshotChanges()
+        .pipe(
+          map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
+        )
+        .subscribe(data => {
+          this.products = data;
+        });
+    }
   }
 }

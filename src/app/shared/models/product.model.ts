@@ -4,12 +4,13 @@ export class Product implements IProduct {
     constructor(
         public categoryID: string,
         public image: string,
+        public imageDetails: string,
         public name: string,
         public price: string,
         public weight: string,
         public description: string = null,
         public discount: string = null,
         public subcategoryID: string = null,
-        public typeID: string = null,
+        public typesID: string[] = [],
     ) { }
 }

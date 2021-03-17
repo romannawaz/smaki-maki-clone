@@ -7,6 +7,8 @@ import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { DiscountComponent } from './pages/discount/discount.component';
 import { VacanciesComponent } from './pages/vacancies/vacancies.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { ProductsListComponent } from './pages/products-list/products-list.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 // Admin
 import { AdminLoginComponent } from './admin-login/admin-login.component';
@@ -26,7 +28,12 @@ const routes: Routes = [
   { path: 'discount', component: DiscountComponent },
   { path: 'vacancies', component: VacanciesComponent },
   { path: 'admin-login', component: AdminLoginComponent },
-  { path: 'products/:category', component: ProductsComponent },
+  {
+    path: 'products/:category', component: ProductsComponent, children: [
+      { path: ':subcategory', component: ProductsListComponent }
+    ]
+  },
+  { path: 'products/:category/:subcategory/:id', component: ProductDetailsComponent },
   {
     path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
       { path: '', pathMatch: 'full', redirectTo: 'category' },

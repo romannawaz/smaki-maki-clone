@@ -1,0 +1,76 @@
+<div class="container page-detail">
+  <div class="row product-nav-wrapper" *ngIf="product">
+    <div class="product-nav">
+      <a href="#" class="prev">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="26" viewBox="0 0 15 26" fill="none">
+          <path d="M14 1L2 13L14 25" stroke="black" stroke-opacity="0.15" stroke-width="2" stroke-linecap="round">
+          </path>
+        </svg>
+      </a>
+
+      <a href="#" class="next">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="26" viewBox="0 0 15 26" fill="none">
+          <path d="M1 1L13 13L1 25" stroke="black" stroke-opacity="0.15" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="col-12 col-xl-11 offset-xl-1">
+      <ul class="breadcrumbs">
+        <li>
+          <a [routerLink]="[ '' ]">Головна</a>
+        </li>
+        <li>
+          <a [routerLink]="[ '/products' + linkBack ]">{{ subcategoryName }}</a>
+        </li>
+        <li>
+          <span>{{ product.name }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6 col-lg-7 col-xl-6 offset-xl-1">
+      <div class="detail-img-wrap">
+        <div class="detail-img">
+          <img class="img" [src]="product.imageDetails">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-5 col-xl-5">
+      <div class="details_desc">
+        <div class="details_desc-top">
+
+          <div class="weight">
+            <span class="product-weight">{{ product.weight }}</span>
+          </div>
+
+          <div class="h4 title">
+            <b>{{ product.name }}</b>
+          </div>
+
+          <div class="description">
+            {{ product.description }}
+          </div>
+
+          <button type="button" class="cart-icon">
+            <span class="amount">0</span>
+            <span class="price">
+              <span class="product-price">
+                {{ product.price.split(' ')[0] }}
+                <span class="symbol-price">{{ product.price.split(' ')[1] }}</span>
+              </span>
+            </span>
+
+            <img class="img" src="/assets/icons/icon-cart.svg">
+
+          </button>
+        </div>
+      </div>
+
+      <ul class="icon-list">
+
+      </ul>
+    </div>
+  </div>
+</div>

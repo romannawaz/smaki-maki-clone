@@ -19,12 +19,13 @@ export class AdminSubcategoryComponent implements OnInit {
   toppings = new FormControl();
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  displayedColumns: string[] = ['name', 'categoryID', 'update', 'delete'];
+  displayedColumns: string[] = ['name', 'urlName', 'categoryID', 'update', 'delete'];
 
   categories: ICategory[] = [];
   subcategories: ISubcategory[] = [];
 
   name: string;
+  urlName: string;
   categoryID: string;
 
   updatedElementID: string;
@@ -48,6 +49,7 @@ export class AdminSubcategoryComponent implements OnInit {
 
   resetForm(): void {
     this.name = null;
+    this.urlName = null;
     this.categoryID = null;
   }
 
@@ -89,7 +91,7 @@ export class AdminSubcategoryComponent implements OnInit {
   }
 
   addNewSubcategory(): void {
-    const newSubcategory = new Subcategory(this.categoryID, this.name);
+    const newSubcategory = new Subcategory(this.categoryID, this.urlName, this.name);
 
     if (!this.updateStatus) {
       this.subcategoryService.addFireCloudSubcategory(newSubcategory)

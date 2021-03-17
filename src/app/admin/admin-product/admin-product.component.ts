@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
@@ -34,11 +35,15 @@ export class AdminProductComponent implements OnInit {
   subcategoryID: string;
 
   types: IType[] = [];
-  typeID: string;
+  typesID = new FormControl();
 
-  fileInput: File;
-  pathToImage: string;
-  uploadPercentImage: Observable<number>;
+  fileInputSmallImage: File;
+  fileInputBigImage: File;
+
+  pathToSmallImage: string;
+  pathToBigImage: string;
+  uploadPercentSmallImage: Observable<number>;
+  uploadPercentBigImage: Observable<number>;
 
   products: IProduct[] = [];
 
@@ -70,9 +75,10 @@ export class AdminProductComponent implements OnInit {
 
     this.categoryID = null;
     this.subcategoryID = null;
-    this.typeID = null;
+    this.typesID.setValue(null);
 
-    this.fileInput = null;
+    this.fileInputSmallImage = null;
+    this.fileInputBigImage = null;
   }
 
   getCategories(): void {
@@ -116,13 +122,24 @@ export class AdminProductComponent implements OnInit {
 
     const task = ref.put(file);
 
-    this.uploadPercentImage = task.percentageChanges();
+    let fileSize = folder.split('/')[1];
 
+    if (fileSize == 'small') {
+      this.uploadPercentSmallImage = task.percentageChanges();
+    }
+    else if (fileSize == 'big') {
+      this.uploadPercentBigImage = task.percentageChanges();
+    }
     task.then(image => {
       this.storage.ref(`${folder}/${image.metadata.name}`)
         .getDownloadURL()
         .subscribe(url => {
-          this.pathToImage = url;
+          if (fileSize == 'small') {
+            this.pathToSmallImage = url;
+          }
+          else if (fileSize == 'big') {
+            this.pathToBigImage = url;
+          }
         });
     });
   }
@@ -139,9 +156,10 @@ export class AdminProductComponent implements OnInit {
   }
 
   updateProduct(product: IProduct): void {
-    let { id, image, categoryID, name, discount, price, weight, description, subcategoryID, typeID } = product;
+    let { id, image, imageDetails, categoryID, name, discount, price, weight, description, subcategoryID, typesID } = product;
 
-    this.pathToImage = image;
+    this.pathToSmallImage = image;
+    this.pathToBigImage = imageDetails;
     this.name = name;
     this.discount = discount;
     this.price = price;
@@ -150,7 +168,7 @@ export class AdminProductComponent implements OnInit {
 
     this.categoryID = categoryID;
     this.subcategoryID = subcategoryID;
-    this.typeID = typeID;
+    this.typesID.setValue(typesID);
 
     this.updateProductID = id;
     this.updateStatus = true;
@@ -167,14 +185,15 @@ export class AdminProductComponent implements OnInit {
   addNewProduct(): void {
     let newProduct = new Product(
       this.categoryID,
-      this.pathToImage,
+      this.pathToSmallImage,
+      this.pathToBigImage,
       this.name,
       this.price,
       this.weight,
       this.description,
       this.discount,
       this.subcategoryID,
-      this.typeID
+      this.typesID.value
     );
 
     if (!this.updateStatus) {

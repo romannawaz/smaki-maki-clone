@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 import { IProduct } from '../interfaces/product.interface';
 
 @Injectable({
@@ -20,6 +20,10 @@ export class ProductService {
     return this.productRef;
   }
 
+  getFireCloudProductByID(id: string): AngularFirestoreDocument<IProduct> {
+    return this.productRef.doc(id);
+  }
+
   getFireCloudProductsByCategoryID(categoryID: string): AngularFirestoreCollection<IProduct> {
     return this.db.collection(this.dbPath, ref => ref.where('categoryID', '==', categoryID));
   }
@@ -29,7 +33,7 @@ export class ProductService {
   }
 
   getFireCloudProductsByTypeID(typeID: string): AngularFirestoreCollection<IProduct> {
-    return this.db.collection(this.dbPath, ref => ref.where('typeID', '==', typeID));
+    return this.db.collection(this.dbPath, ref => ref.where('typesID', 'array-contains', typeID));
   }
 
   addFireCloudProduct(product: IProduct): Promise<DocumentReference<IProduct>> {

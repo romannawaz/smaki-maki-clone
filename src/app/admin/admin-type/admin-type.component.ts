@@ -29,6 +29,7 @@ export class AdminTypeComponent implements OnInit {
     private typeService: TypeService
   ) { }
 
+
   ngOnInit(): void {
     this.getSubcategories();
     this.getTypes();

@@ -7,6 +7,11 @@
     </mat-form-field>
 
     <mat-form-field class="full-width">
+      <mat-label>Link value</mat-label>
+      <input matInput [(ngModel)]="urlName" name="urlName">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
       <mat-label>Choose category</mat-label>
       <mat-select [(ngModel)]="categoryID" name="categoryID">
         <mat-option *ngFor="let category of categories" [value]="category.id">
@@ -63,11 +68,16 @@
       </mat-expansion-panel-header>
 
       <ng-container *ngIf="category.subcategories && category.subcategories.length > 0; else elseTemplate">
-        <table mat-table class="mat-elevation-z8" [dataSource]="category.subcategories">
+        <table mat-table class="mat-elevation-z8 full-width" [dataSource]="category.subcategories">
 
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Subcategory name</th>
             <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="urlName">
+            <th mat-header-cell *matHeaderCellDef>Subcategory link value</th>
+            <td mat-cell *matCellDef="let element"> {{ element.urlName }} </td>
           </ng-container>
 
           <ng-container matColumnDef="categoryID">

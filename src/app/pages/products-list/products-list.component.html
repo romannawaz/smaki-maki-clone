@@ -1,0 +1,54 @@
+<form [formGroup]="filter">
+  <div class="page-sort">
+    <div class="checkbox-thumb-wrap" *ngIf="types && types.length > 1">
+      <label class="checkbox-thumb">
+        <input type="radio" formControlName="productFilter" value="all" (change)="getProductsByType()">
+        <span>Всi</span>
+      </label>
+
+      <label class="checkbox-thumb" *ngFor="let type of types">
+        <input type="radio" formControlName="productFilter" [value]="type.id" (change)="getProductsByType()">
+        <span>{{ type.name }}</span>
+      </label>
+    </div>
+  </div>
+</form>
+
+<div class="row product-row">
+  <div class="col-xl-3 col-md-4 col-6" *ngFor="let product of products">
+    <div class="product">
+      <div class="product_discount" *ngIf="product.discount">
+        {{ product.discount.split(' ')[0] }}
+        <sup><span class="symbol-price">{{ product.discount.split(' ')[1] }}</span></sup>
+      </div>
+
+      <a href="#" class="product_image">
+        <img class="img" [src]="product.image">
+      </a>
+
+      <div class="product_bottom">
+        <div class="product_weight">{{ product.weight }}</div>
+
+        <a [routerLink]="[ '/products/sushi/' + '/' + currentSubcategory.urlName + '/'+  product.id ]"
+          class="product_title">{{ product.name }}</a>
+
+        <div class="product_controls">
+          <span class="price">{{ product.price.split(' ')[0] }} <span
+              class="symbol-price">{{ product.price.split(' ')[1] }}</span></span>
+
+          <div class="product_controls_inner">
+            <button type="button" class="btn btn-sm buy-button addBtn">
+              Купити
+            </button>
+          </div>
+        </div>
+
+        <div class="hover_bottom_info" *ngIf="product.description">
+          <div class="product_description">
+            {{ product.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

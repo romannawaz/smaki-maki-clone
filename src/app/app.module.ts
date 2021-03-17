@@ -21,6 +21,8 @@ import { DiscountComponent } from './pages/discount/discount.component';
 import { VacanciesComponent } from './pages/vacancies/vacancies.component';
 import { CurrentDiscountComponent } from './pages/current-discount/current-discount.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { ProductsListComponent } from './pages/products-list/products-list.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 // Admin
 import { AdminLoginComponent } from './admin-login/admin-login.component';
@@ -65,6 +67,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ProductsComponent,
     AdminTypeComponent,
     FooterComponent,
+    ProductDetailsComponent,
+    ProductsListComponent,
   ],
   imports: [
     BrowserModule,

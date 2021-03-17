@@ -3,65 +3,18 @@
 <div class="products-wrapper">
   <div class="container">
     <div class="col-12">
+
       <div class="block-title">
         <h1>Доставка {{ currentCategory ? currentCategory.name.toLowerCase() : '' }} у Львові</h1>
       </div>
 
-      <form [formGroup]="subcategoryFormGroup" class="tabs-toggle" *ngIf="subcategories && subcategories.length > 1">
-        <label *ngFor="let subcategory of subcategories" class="subcategory_nav">
-          <input type="radio" formControlName="subcategory" [value]="subcategory.id" (change)="getCurrentSubcategory()">
-          <span>{{ subcategory.name }}</span>
-        </label>
-      </form>
-
-      <form [formGroup]="filter">
-        <div class="page-sort">
-          <div class="checkbox-thumb-wrap" *ngIf="types && types.length > 1">
-            <label class="checkbox-thumb">
-              <input type="radio" formControlName="productFilter" value="all" (change)="getProductsByType()">
-              <span>Всi</span>
-            </label>
-
-            <label class="checkbox-thumb" *ngFor="let type of types">
-              <input type="radio" formControlName="productFilter" [value]="type.id" (change)="getProductsByType()">
-              <span>{{ type.name }}</span>
-            </label>
-          </div>
-        </div>
-      </form>
-
-      <div class="row product-row">
-        <div class="col-xl-3 col-md-4 col-6" *ngFor="let product of products">
-          <div class="product">
-            <a href="#" class="product_image">
-              <img class="img" [src]="product.image">
-            </a>
-
-            <div class="product_bottom">
-              <div class="product_weight">{{ product.weight }}</div>
-
-              <div class="product_title">{{ product.name }}</div>
-
-              <div class="product_controls">
-                <span class="price">{{ product.price.split(' ')[0] }} <span
-                    class="symbol-price">{{ product.price.split(' ')[1] }}</span></span>
-
-                <div class="product_controls_inner">
-                  <button type="button" class="btn btn-sm buy-button addBtn">
-                    Купити
-                  </button>
-                </div>
-              </div>
-
-              <div class="hover_bottom_info" *ngIf="product.description">
-                <div class="product_description">
-                  {{ product.description }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="tabs-toggle" *ngIf="subcategories && subcategories.length > 0">
+        <a [routerLink]="[ subcategory.urlName ]" routerLinkActive="active" *ngFor="let subcategory of subcategories"
+          class="subcategory_nav">{{ subcategory.name }}</a>
       </div>
+
+      <router-outlet></router-outlet>
+
     </div>
   </div>
 </div>

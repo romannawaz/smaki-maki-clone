@@ -7,9 +7,7 @@ import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
 import { IType } from 'src/app/shared/interfaces/type.interface';
 import { CategoryService } from 'src/app/shared/services/category.service';
-import { ProductService } from 'src/app/shared/services/product.service';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
-import { TypeService } from 'src/app/shared/services/type.service';
 
 @Component({
   selector: 'app-products',
@@ -24,44 +22,22 @@ export class ProductsComponent implements OnInit {
   currentSubcategory: ISubcategory;
 
   subcategories: ISubcategory[] = [];
-  types: IType[] = [];
-
-  subcategoryFormGroup: FormGroup;
-  filter: FormGroup;
-
-  products: IProduct[] = [];
 
   constructor(
-    private fb: FormBuilder,
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
-    private typeService: TypeService,
-    private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private route: Router
   ) {
     this.route.events
       .subscribe(e => {
         if (e instanceof NavigationEnd) {
-          this.subcategories = null;
-          this.types = null;
-          this.products = null;
-
-          this.subcategoryFormGroup.value.subcategory = null;
 
           this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
 
           this.getCurrentCategory();
-
-          this.filter = this.fb.group({
-            productFilter: ['all', Validators.required]
-          });
         }
       });
-
-    this.subcategoryFormGroup = this.fb.group({
-      subcategory: ['', Validators.required]
-    });
   }
 
   ngOnInit(): void {
@@ -70,17 +46,17 @@ export class ProductsComponent implements OnInit {
 
   getCurrentCategory(): void {
     this.categoryService.getFireCloudCategoryByUrlName(this.currentProductPage)
-    .snapshotChanges()
-    .pipe(
-      map(changes => changes.map(cat => ({ id: cat.payload.doc.id, ...cat.payload.doc.data() })))
-    )
-    .subscribe(data => {
-      if (this.currentCategory != data[0]) {
-        this.currentCategory = data[0];
+      .snapshotChanges()
+      .pipe(
+        map(changes => changes.map(cat => ({ id: cat.payload.doc.id, ...cat.payload.doc.data() })))
+      )
+      .subscribe(data => {
+        if (this.currentCategory != data[0]) {
+          this.currentCategory = data[0];
 
-        this.getSubcategoriesByCategoryID();
-      }
-    });
+          this.getSubcategoriesByCategoryID();
+        }
+      });
   }
 
   getSubcategoriesByCategoryID() {
@@ -93,94 +69,8 @@ export class ProductsComponent implements OnInit {
         if (data) {
           if (data.length > 0) {
             this.subcategories = data;
-
-            this.subcategoryFormGroup = this.fb.group({
-              subcategory: [this.subcategories[0].id, Validators.required]
-            });
-
-            this.getCurrentSubcategory();
-          }
-          else {
-            this.getProductsByCategoryID();
           }
         }
       });
-  }
-
-  getCurrentSubcategory(): void {
-    this.products = null;
-    this.types = null;
-
-    this.subcategoryService.getFireCloudSubcategoryByID(this.subcategoryFormGroup.value.subcategory)
-      .get()
-      .pipe(
-        map(changes => ({ id: changes.id, ...changes.data() }))
-      )
-      .subscribe(data => {
-        this.currentSubcategory = data;
-
-        this.getTypes();
-      });
-
-  }
-
-  getTypes(): void {
-    this.typeService.getFireCloudTypesBySubcategoryID(this.currentSubcategory.id)
-      .snapshotChanges()
-      .pipe(
-        map(changes => changes.map(type => ({ id: type.payload.doc.id, ...type.payload.doc.data() })))
-      )
-      .subscribe(data => {
-        if (data.length > 0) {
-          this.types = data;
-
-          this.getProductsByType();
-        }
-        else {
-          this.getProductBySubcategoryID();
-        }
-      });
-  }
-
-  // -----------
-
-  getProductsByCategoryID(): void {
-    this.productService.getFireCloudProductsByCategoryID(this.currentCategory.id)
-      .snapshotChanges()
-      .pipe(
-        map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
-      )
-      .subscribe(data => {
-        this.products = data;
-      });
-  }
-
-  getProductBySubcategoryID(): void {
-    this.productService.getFireCloudProductsBySubcategoryID(this.subcategoryFormGroup.value.subcategory)
-      .snapshotChanges()
-      .pipe(
-        map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
-      )
-      .subscribe(data => {
-        this.products = data;
-      });
-  }
-
-  getProductsByType(): void {
-    this.products = null;
-
-    if (this.filter.value.productFilter === 'all') {
-      this.getProductBySubcategoryID();
-    }
-    else {
-      this.productService.getFireCloudProductsByTypeID(this.filter.value.productFilter)
-        .snapshotChanges()
-        .pipe(
-          map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
-        )
-        .subscribe(data => {
-          this.products = data;
-        });
-    }
   }
 }

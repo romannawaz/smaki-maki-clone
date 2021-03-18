@@ -8,6 +8,10 @@ $light-red: #ed3544;
   background: url(/assets/images/current-discount-bg.jpg) no-repeat bottom;
   background-size: 100% 100%;
 
+  .container {
+    padding-bottom: 30px;
+  }
+
   .discount_content {
     font-family: "Caveat Regular";
 

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+
+// Interfaces
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
-import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
-import { IType } from 'src/app/shared/interfaces/type.interface';
+
+// Services
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
+
+// rxjs operators
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -23,6 +26,8 @@ export class ProductsComponent implements OnInit {
 
   subcategories: ISubcategory[] = [];
 
+  isCategoryChanged: boolean;
+
   constructor(
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
@@ -32,8 +37,15 @@ export class ProductsComponent implements OnInit {
     this.route.events
       .subscribe(e => {
         if (e instanceof NavigationEnd) {
+          this.subcategories = null;
+          this.isCategoryChanged = true;
 
-          this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
+          if (this.currentProductPage != this.activatedRoute.snapshot.paramMap.get('category')) {
+            this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
+          }
+          else {
+            this.isCategoryChanged = false;
+          }
 
           this.getCurrentCategory();
         }
@@ -66,9 +78,11 @@ export class ProductsComponent implements OnInit {
         map(changes => changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() })))
       )
       .subscribe(data => {
-        if (data) {
-          if (data.length > 0) {
-            this.subcategories = data;
+        if (data && data.length > 0) {
+          this.subcategories = data;
+
+          if (this.isCategoryChanged) {
+            this.route.navigateByUrl(`/products/${this.currentProductPage}/${this.subcategories[0].urlName}`);
           }
         }
       });

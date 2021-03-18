@@ -5,6 +5,7 @@
 
 .container {
   width: 100%;
+  max-width: 100%;
 
   padding-right: 15px;
   padding-left: 15px;
@@ -12,11 +13,18 @@
   margin-right: auto;
   margin-left: auto;
 
-  @media (min-width: 992px) {
+  @media screen and (min-width: 992px) {
     max-width: 1520px;
 
     padding-left: 60px;
     padding-right: 60px;
+  }
+
+  @media screen and (min-width: 1200px) and (max-width: 1600px) {
+    padding-left: 90px;
+    padding-right: 25px;
+    
+    max-width: 100%;
   }
 }
 
@@ -65,12 +73,6 @@ a {
   &:hover {
     text-decoration: none;
   }
-}
-
-ul {
-  margin: 0;
-
-  list-style: none;
 }
 
 svg path {
@@ -133,4 +135,12 @@ body {
     background: #fff;
     color: #ed3544;
   }
+}
+
+// --------------
+
+ul {
+  margin: 0;
+
+  list-style: none;
 }

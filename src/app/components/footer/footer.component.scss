@@ -1,10 +1,9 @@
 .wrapper {
   margin-top: 80px;
 
-  position: sticky;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  @media screen and (max-width: 991px) {
+    margin-top: 10px;
+  }
 }
 
 .footer_top {
@@ -39,6 +38,11 @@
 
     pointer-events: none;
   }
+
+  @media screen and (max-width: 991px) {
+    margin-top: 40px;
+    padding: 40px 0;
+  }
 }
 
 .icon-list {
@@ -51,6 +55,10 @@
 
     padding-left: 50px;
     padding-top: 5px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     .img {
       position: absolute;
@@ -76,6 +84,12 @@
         color: #22262a;
       }
     }
+
+    @media screen and (max-width: 767px) {
+      padding-left: 40px;
+      padding-top: 0;
+      margin-bottom: 15px;
+    }
   }
 }
 
@@ -84,6 +98,10 @@
 
   li {
     margin-bottom: 17px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     a {
       cursor: pointer;
@@ -96,6 +114,10 @@
       &.active {
         color: #ed3544;
       }
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 10px;
     }
   }
 }
@@ -170,6 +192,12 @@
 
     text-transform: uppercase;
     line-height: 1.2em;
+  }
+
+  @media screen and (max-width: 991px) {
+    // margin-left: -60px;
+    // margin-right: -60px;
+    padding: 40px 80px;
   }
 }
 
@@ -315,6 +343,11 @@
         z-index: 2;
       }
     }
+
+    @media screen and (max-width: 1600px) {
+      top: -44px;
+      right: 130px;
+    }
   }
 
   .container {
@@ -323,6 +356,26 @@
 
     .coryright {
       margin-right: 40px;
+
+      @media screen and (max-width: 1199px) {
+        margin-right: 30px;
+
+        @media screen and (max-width: 767px) {
+          margin-right: 0;
+          margin-bottom: 15px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 991px) {
+      flex-wrap: wrap;
+      text-align: center;
+      align-items: flex-start;
+
+      @media screen and (max-width: 767px) {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
 }
@@ -342,6 +395,18 @@
           text-decoration: none;
         }
       }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      @media screen and (max-width: 1199px) {
+        margin-right: 15px;
+
+        @media screen and (max-width: 991px) {
+          margin-bottom: 15px;
+        }
+      }
     }
   }
 }
@@ -354,5 +419,10 @@
     vertical-align: middle;
     margin-left: 5px;
     height: 23px;
+  }
+
+  @media screen and (max-width: 991px) {
+    width: 100%;
+    margin-left: 0;
   }
 }

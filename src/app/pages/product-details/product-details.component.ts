@@ -46,7 +46,7 @@ export class ProductDetailsComponent implements OnInit {
               this.subcategoryName = name[0].name;
             });
 
-          this.linkBack = `/${this.categoryUrl}/${this.subcategoryUrl}`;
+          this.linkBack = `/products/${this.categoryUrl}/${this.subcategoryUrl}`;
 
           this.getProductByID();
         }
@@ -63,7 +63,6 @@ export class ProductDetailsComponent implements OnInit {
       )
       .subscribe(data => {
         this.product = data;
-        console.log(this.product);
       })
   }
 }

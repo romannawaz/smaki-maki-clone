@@ -3,11 +3,13 @@ import { ICategory } from 'src/app/shared/interfaces/category.interface';
 import { CategoryService } from 'src/app/shared/services/category.service';
 
 import { map } from 'rxjs/operators';
+import { ScrollDirective } from 'src/app/shared/directives/scroll.directive';
 
 @Component({
   selector: 'app-header-side',
   templateUrl: './header-side.component.html',
-  styleUrls: ['./header-side.component.scss']
+  styleUrls: ['./header-side.component.scss'],
+  viewProviders: [ScrollDirective]
 })
 export class HeaderSideComponent implements OnInit {
 

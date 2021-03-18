@@ -48,6 +48,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
+import { ScrollDirective } from './shared/directives/scroll.directive';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { FooterComponent } from './components/footer/footer.component';
     FooterComponent,
     ProductDetailsComponent,
     ProductsListComponent,
+    ScrollDirective,
   ],
   imports: [
     BrowserModule,

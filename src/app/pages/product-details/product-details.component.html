@@ -68,9 +68,72 @@
         </div>
       </div>
 
-      <ul class="icon-list">
-
+      <ul class="icons_list">
+        <li>
+          <img src="/assets/icons/icon-list-scooter.svg" class="img">
+          <p>Доставимо до <span style="color: #e94545"><b>29</b></span> хвилин або даруємо піцу/рол за спізнення</p>
+        </li>
+        <li>
+          <img src="/assets/icons/icon-list-info.svg" class="img">
+          <p>Всі замовлення містять васабі, маринований імбир і соєвий соус в обсязі, достатньому для вживання
+            замовленого. На 1 рол розраховано 2 набори паличок.</p>
+        </li>
+        <li>
+          <img src="/assets/icons/icon-list-money.svg" class="img">
+          <p>За кожну покупку, Ви отримуєте 5% на Ваш бонусний рахунок</p>
+        </li>
       </ul>
     </div>
   </div>
+
+  <div class="row medium-top-offset">
+    <div class="col-12 text-center">
+      <div class="block-title2 h4">
+        <b>Спробуйте також</b>
+      </div>
+    </div>
+  </div>
+
+  <swiper [slidesPerView]="4" [spaceBetween]="0" *ngIf="recommendedProducts" class="row swiper">
+
+    <ng-template swiperSlide *ngFor="let recommendedProduct of recommendedProducts" class="col-xl-3 col-md-4 col-6">
+      <div class="product">
+        <div class="product_discount" *ngIf="recommendedProduct.discount">
+          {{ recommendedProduct.discount.split(' ')[0] }}
+          <sup><span class="symbol-price">{{ recommendedProduct.discount.split(' ')[1] }}</span></sup>
+        </div>
+
+        <a href="#" class="product_image">
+          <img class="img" [src]="recommendedProduct.image">
+        </a>
+
+        <div class="product_bottom">
+          <div class="product_weight">{{ recommendedProduct.weight }}</div>
+
+          <a [routerLink]="[ '/products/sushi/' + '/' + 'rolls' + '/'+  recommendedProduct.id ]"
+            class="product_title">{{ recommendedProduct.name }}</a>
+
+          <div class="product_controls">
+            <span class="price">{{ recommendedProduct.price.split(' ')[0] }} <span
+                class="symbol-price">{{ recommendedProduct.price.split(' ')[1] }}</span></span>
+
+            <div class="product_controls_inner">
+              <button type="button" class="btn btn-sm buy-button addBtn">
+                Купити
+              </button>
+            </div>
+          </div>
+
+          <div class="hover_bottom_info" *ngIf="product.description">
+            <div class="product_description">
+              {{ recommendedProduct.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </ng-template>
+
+  </swiper>
+
 </div>

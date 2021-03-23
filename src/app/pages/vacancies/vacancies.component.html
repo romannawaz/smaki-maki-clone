@@ -1,1 +1,163 @@
-<p>vacancies works!</p>
+<div class="vacancies-wrapper">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <div class="block-title text-center">
+          <h1 class="h2">
+            <b>Приєднуйся до команди Smaki-Maki</b>
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="row left-right-row">
+
+      <div class="col-md-5 col-xl-5 ">
+        <div class="left-right-img">
+
+          <img src="/assets/images/vacancies1.jpg" class="img">
+        </div>
+      </div>
+
+      <div class="col-md-7 col-xl-7 align-self-center">
+        <div class="vacancy-block">
+          <div class="h6">
+            Сушист
+          </div>
+
+          <div class="text-xs">
+            <p>
+              Що будете робити? - Готувати смачні роли та суші. Багато ролів та суші! Опануєте всі різновиди
+              технологічних процесів у приготуванні страв японської кухні. З часом пізнаєте всі тонкощі східної кухні :)
+            </p>
+          </div>
+
+          <a href="#" class="btn-red">ДЕТАЛЬНІШЕ</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row left-right-row">
+
+      <div class="col-md-5 col-xl-5 ">
+        <div class="left-right-img">
+
+          <img src="/assets/images/vacancies1.jpg" class="img">
+        </div>
+      </div>
+
+      <div class="col-md-7 col-xl-7 align-self-center">
+        <div class="vacancy-block">
+          <div class="h6">
+            Сушист
+          </div>
+
+          <div class="text-xs">
+            <p>
+              Що будете робити? - Готувати смачні роли та суші. Багато ролів та суші! Опануєте всі різновиди
+              технологічних процесів у приготуванні страв японської кухні. З часом пізнаєте всі тонкощі східної кухні :)
+            </p>
+          </div>
+
+          <a href="#" class="btn-red">ДЕТАЛЬНІШЕ</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row left-right-row">
+
+      <div class="col-md-5 col-xl-5 ">
+        <div class="left-right-img">
+
+          <img src="/assets/images/vacancies1.jpg" class="img">
+        </div>
+      </div>
+
+      <div class="col-md-7 col-xl-7 align-self-center">
+        <div class="vacancy-block">
+          <div class="h6">
+            Сушист
+          </div>
+
+          <div class="text-xs">
+            <p>
+              Що будете робити? - Готувати смачні роли та суші. Багато ролів та суші! Опануєте всі різновиди
+              технологічних процесів у приготуванні страв японської кухні. З часом пізнаєте всі тонкощі східної кухні :)
+            </p>
+          </div>
+
+          <a href="#" class="btn-red">ДЕТАЛЬНІШЕ</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row left-right-row">
+
+      <div class="col-md-5 col-xl-5 ">
+        <div class="left-right-img">
+
+          <img src="/assets/images/vacancies1.jpg" class="img">
+        </div>
+      </div>
+
+      <div class="col-md-7 col-xl-7 align-self-center">
+        <div class="vacancy-block">
+          <div class="h6">
+            Сушист
+          </div>
+
+          <div class="text-xs">
+            <p>
+              Що будете робити? - Готувати смачні роли та суші. Багато ролів та суші! Опануєте всі різновиди
+              технологічних процесів у приготуванні страв японської кухні. З часом пізнаєте всі тонкощі східної кухні :)
+            </p>
+          </div>
+
+          <a href="#" class="btn-red">ДЕТАЛЬНІШЕ</a>
+        </div>
+      </div>
+
+    </div> -->
+
+    <div class="list">
+      <!-- <ul>
+        <li *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p }">{{ item }}</li>
+      </ul> -->
+
+      <div class="row left-right-row" *ngFor="let vacancy of vacancies | paginate: { itemsPerPage: 3, currentPage: p }">
+
+        <div class="col-md-5 col-xl-5 ">
+          <div class="left-right-img">
+
+            <img [src]="vacancy.pathToImage" class="img">
+          </div>
+        </div>
+
+        <div class="col-md-7 col-xl-7 align-self-center">
+          <div class="vacancy-block">
+            <div class="h6">
+              {{ vacancy.title }}
+            </div>
+
+            <div class="text-xs">
+              <p>
+                {{ vacancy.description }}
+              </p>
+            </div>
+
+            <a href="#" class="btn-red">ДЕТАЛЬНІШЕ</a>
+          </div>
+        </div>
+
+      </div>
+
+      <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="" class="my-pagination">
+      </pagination-controls>
+    </div>
+
+  </div>
+</div>

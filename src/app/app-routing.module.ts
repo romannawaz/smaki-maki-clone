@@ -17,6 +17,7 @@ import { AdminProductComponent } from './admin/admin-product/admin-product.compo
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
 import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
+import { AdminVacanciesComponent } from './admin/admin-vacancies/admin-vacancies.component';
 
 // Guards
 import { AdminGuard } from './shared/guards/admin.guard';
@@ -40,7 +41,8 @@ const routes: Routes = [
       { path: 'category', component: AdminCategoryComponent },
       { path: 'subcategory', component: AdminSubcategoryComponent },
       { path: 'type', component: AdminTypeComponent },
-      { path: 'product', component: AdminProductComponent }
+      { path: 'product', component: AdminProductComponent },
+      { path: 'vacancies', component: AdminVacanciesComponent }
     ]
   }
 ];

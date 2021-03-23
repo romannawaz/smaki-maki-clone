@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+
+// Interafaces
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
+
+// Services
 import { CategoryService } from 'src/app/shared/services/category.service';
 
-import { map } from 'rxjs/operators';
+// Directives
 import { ScrollDirective } from 'src/app/shared/directives/scroll.directive';
+
+// rxjs
+import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header-side',
@@ -16,11 +24,23 @@ export class HeaderSideComponent implements OnInit {
   categories: ICategory[] = [];
 
   constructor(
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.getCategories();
+  }
+
+  openDialog(templateRef: TemplateRef<any>): void {
+    this.dialog.open(templateRef, {
+      width: '380px',
+      panelClass: 'mat-dialog-wrapper'
+    });
+  }
+
+  closeDialog(): void {
+    this.dialog.closeAll();
   }
 
   getCategories(): void {

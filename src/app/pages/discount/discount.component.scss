@@ -1,0 +1,98 @@
+.block-title {
+  display: block;
+
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 20px;
+  padding: 0 20px;
+
+  text-align: center;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    height: 30px;
+    width: 100%;
+
+    background-image: url(/assets/images/decor-line-lg.svg);
+    background-size: contain;
+    background-position: bottom center;
+
+    z-index: -1;
+
+    background-repeat: no-repeat;
+  }
+
+  .h3 {
+    font-size: 41px;
+  }
+}
+
+.left-right-row {
+  padding-top: 50px;
+}
+
+.discount_content {
+  padding-left: 23px;
+
+  .discount_title {
+    display: block;
+
+    position: relative;
+    z-index: 1;
+
+    margin-left: -23px;
+    margin-bottom: 20px;
+    padding: 0 20px;
+
+    font-family: "Caveat Bold";
+    text-align: left;
+
+    &:before {
+      content: "";
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+
+      height: 30px;
+      width: 100%;
+
+      background-image: url(/assets/images/decor-line-lg.svg);
+      background-size: contain;
+      background-position: bottom center;
+      background-repeat: no-repeat;
+    }
+
+    .h3 {
+      font-size: 41px;
+      line-height: 1.2;
+    }
+  }
+
+  .discount_acticle {
+    font-family: "Montserrat Regular";
+    font-size: 17px;
+    line-height: 1.6em;
+
+    > p {
+      margin-bottom: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 25px;
+      }
+
+      span {
+        strong {
+          font-family: "Montserrat Bold";
+        }
+      }
+    }
+  }
+}

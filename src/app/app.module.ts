@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
 import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
+import { AdminVacanciesComponent } from './admin/admin-vacancies/admin-vacancies.component';
 
 // Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -44,11 +45,21 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
 import { ScrollDirective } from './shared/directives/scroll.directive';
+
+// Angular Google Maps
+
+// Swiper
+import { SwiperModule } from 'swiper/angular';
+
+// Pagination
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -65,6 +76,7 @@ import { ScrollDirective } from './shared/directives/scroll.directive';
     AdminProductComponent,
     AdminCategoryComponent,
     AdminSubcategoryComponent,
+    AdminVacanciesComponent,
     ProductsComponent,
     AdminTypeComponent,
     FooterComponent,
@@ -90,7 +102,11 @@ import { ScrollDirective } from './shared/directives/scroll.directive';
     MatProgressBarModule,
     MatTableModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    TextFieldModule,
+    MatDialogModule,
+    SwiperModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

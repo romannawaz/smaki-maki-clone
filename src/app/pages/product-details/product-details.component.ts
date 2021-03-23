@@ -1,9 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+
+// Interfaces
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
+
+// Services
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
+
+// rxjs operators
+import { map } from 'rxjs/operators';
+
+// Swiper
+import SwiperCore, {
+  Navigation,
+  Scrollbar,
+  A11y,
+} from 'swiper/core';
+
+SwiperCore.use([Navigation, Scrollbar, A11y]);
 
 @Component({
   selector: 'app-product-details',
@@ -22,6 +37,8 @@ export class ProductDetailsComponent implements OnInit {
   linkBack: string;
 
   product: IProduct;
+
+  recommendedProducts: IProduct[] = [];
 
   constructor(
     private subcategoryService: SubcategoryService,
@@ -63,6 +80,20 @@ export class ProductDetailsComponent implements OnInit {
       )
       .subscribe(data => {
         this.product = data;
+
+        this.getRecommendedProducts();
+      })
+  }
+
+  getRecommendedProducts(): void {
+    this.productService.getFireCloudProductsByCategoryID(this.product.categoryID)
+      .snapshotChanges()
+      .pipe(
+        map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
+      )
+      .subscribe(data => {
+        this.recommendedProducts = data.filter(product => product.id != this.product.id);
+        console.log(this.recommendedProducts);
       })
   }
 }

@@ -18,6 +18,7 @@ import { AdminCategoryComponent } from './admin/admin-category/admin-category.co
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
 import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
 import { AdminVacanciesComponent } from './admin/admin-vacancies/admin-vacancies.component';
+import { AdminDiscountComponent } from './admin/admin-discount/admin-discount.component';
 
 // Guards
 import { AdminGuard } from './shared/guards/admin.guard';
@@ -42,7 +43,8 @@ const routes: Routes = [
       { path: 'subcategory', component: AdminSubcategoryComponent },
       { path: 'type', component: AdminTypeComponent },
       { path: 'product', component: AdminProductComponent },
-      { path: 'vacancies', component: AdminVacanciesComponent }
+      { path: 'vacancies', component: AdminVacanciesComponent },
+      { path: 'discounts', component: AdminDiscountComponent }
     ]
   }
 ];

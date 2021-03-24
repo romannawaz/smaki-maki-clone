@@ -39,13 +39,18 @@ export class ProductsComponent implements OnInit {
         if (e instanceof NavigationEnd) {
           this.subcategories = null;
           this.isCategoryChanged = true;
+          // console.log(this.activatedRoute?.snapshot?.children[0]?.params?.subcategory);
 
-          if (this.currentProductPage != this.activatedRoute.snapshot.paramMap.get('category')) {
-            this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
-          }
-          else {
+          if (this.activatedRoute?.snapshot?.children[0]?.params?.subcategory) {
             this.isCategoryChanged = false;
           }
+
+          // if (this.currentProductPage != this.activatedRoute.snapshot.paramMap.get('category')) {
+          this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
+          // }
+          // else {
+          //   this.isCategoryChanged = false;
+          // }
 
           this.getCurrentCategory();
         }

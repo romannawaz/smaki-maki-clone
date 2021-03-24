@@ -1,0 +1,52 @@
+<div class="login-modal-wrapper">
+
+  <div class="login-modal-container">
+    <h2 mat-dialog-title class="title">Вхід</h2>
+
+    <div class="line-text">
+      <span>або</span>
+    </div>
+
+    <form class="form-group">
+
+      <div class="checkbox-thumbs-wrapper">
+
+        <label class="checkbox-thumb">
+          <input type="radio" name="login_type">
+          <span>Телефон</span>
+        </label>
+
+        <label class="checkbox-thumb">
+          <input type="radio" name="login_type" checked>
+          <span>E-mail</span>
+        </label>
+
+      </div>
+
+      <div class="input-wrapper" [ngClass]="{ 'focus': signInEmail != null && signInEmail != '' }">
+        <span class="floating-label">E-mail*</span>
+        <input type="text" class="input" name="email" [(ngModel)]="signInEmail" name="signInEmail">
+      </div>
+
+      <div class="input-wrapper">
+        <span class="floating-label">Пароль*</span>
+        <input type="password" class="input" name="pass" [(ngModel)]="signInPassword" name="signInPassword">
+      </div>
+
+      <button type="button" class="recovery-btn">Забули пароль?</button>
+
+      <button type="submit" class="btn-red sign-in-btn" (click)="signInUser()">Увійти</button>
+
+    </form>
+
+    <div class="bottom-text">
+      <p>
+        Не маєш акаунту?
+        <button type="button" class="btn-sign-up" (click)="openSignUpModal()">Зареєструватись</button>
+      </p>
+    </div>
+  </div>
+
+  <button mat-dialog-close class="btn-close"></button>
+
+</div>

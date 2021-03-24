@@ -24,6 +24,10 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
+// Modal
+import { ModalSignInComponent } from './pages/modal-sign-in/modal-sign-in.component';
+import { ModalSignUpComponent } from './pages/modal-sign-up/modal-sign-up.component';
+
 // Admin
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminComponent } from './admin/admin.component';
@@ -85,6 +89,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProductsListComponent,
     ScrollDirective,
     AdminDiscountComponent,
+    ModalSignInComponent,
+    ModalSignUpComponent,
   ],
   imports: [
     BrowserModule,

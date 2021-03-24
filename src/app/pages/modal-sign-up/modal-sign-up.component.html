@@ -1,0 +1,36 @@
+<div class="login-modal-wrapper">
+
+  <div class="login-modal-container">
+    <h2 mat-dialog-title class="title">Реєстрація</h2>
+
+    <div class="line-text">
+      <span>або</span>
+    </div>
+
+    <form class="form-group">
+
+      <div class="input-wrapper">
+        <span class="floating-label">E-mail*</span>
+        <input type="text" class="input" [(ngModel)]="signUpEmail" name="signUpEmail">
+      </div>
+
+      <div class="input-wrapper">
+        <span class="floating-label">Пароль*</span>
+        <input type="password" class="input" [(ngModel)]="signUpPassword" name="signUpPassword">
+      </div>
+
+      <button type="submit" class="btn-red sign-in-btn" (click)="createNewUser()">Зареєструватись</button>
+
+    </form>
+
+    <div class="bottom-text">
+      <p>
+        Вже є акаунт?
+        <button type="button" class="btn-sign-up" (click)="openSignInModal()">Увійти</button>
+      </p>
+    </div>
+  </div>
+
+  <button mat-dialog-close class="btn-close"></button>
+
+</div>

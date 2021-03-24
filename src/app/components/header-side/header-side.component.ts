@@ -1,4 +1,5 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ModalSignInComponent } from 'src/app/pages/modal-sign-in/modal-sign-in.component';
 
 // Interafaces
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
@@ -11,6 +12,8 @@ import { ScrollDirective } from 'src/app/shared/directives/scroll.directive';
 
 // rxjs
 import { map } from 'rxjs/operators';
+
+// Modal
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -32,15 +35,12 @@ export class HeaderSideComponent implements OnInit {
     this.getCategories();
   }
 
-  openDialog(templateRef: TemplateRef<any>): void {
-    this.dialog.open(templateRef, {
-      width: '380px',
-      panelClass: 'mat-dialog-wrapper'
-    });
-  }
+  openSignInModal() {
+    const dialogRef = this.dialog.open(ModalSignInComponent);
 
-  closeDialog(): void {
-    this.dialog.closeAll();
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   getCategories(): void {

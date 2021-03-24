@@ -12,7 +12,25 @@ export class AuthService {
     private router: Router
   ) { }
 
-  signIn(email: string, password: string): void {
+  signUpUser(email: string, password: string): void {
+    this.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  signInUser(email: string, password: string): void {
+    this.auth.signInWithEmailAndPassword(email, password)
+      .then(userResponse => {
+        const user = {
+          email: userResponse.user.email,
+          id: userResponse.user.uid,
+          role: 'USER'
+        }
+
+        localStorage.setItem('user', JSON.stringify(user));
+      })
+      .catch(err => console.log(err));
+  }
+
+  signInAdmin(email: string, password: string): void {
     this.auth.signInWithEmailAndPassword(email, password)
       .then(userResponse => {
         const admin = {
@@ -27,7 +45,7 @@ export class AuthService {
       .catch(err => console.log(err));
   }
 
-  signOut(): void {
+  signOutAdmin(): void {
     this.auth.signOut()
       .then(() => {
         localStorage.removeItem('admin');

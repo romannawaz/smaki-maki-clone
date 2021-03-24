@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void { }
 
   signOut(): void {
-    this.authService.signOut();
+    this.authService.signOutAdmin();
   }
 
 }

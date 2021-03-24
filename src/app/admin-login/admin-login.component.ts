@@ -40,7 +40,7 @@ export class AdminLoginComponent implements OnInit {
   }
 
   signIn(): void {
-    this.authService.signIn(this.email.value, this.password.value);
+    this.authService.signInAdmin(this.email.value, this.password.value);
   }
 
 }

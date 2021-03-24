@@ -159,3 +159,8 @@ b {
     font-family: "Caveat Bold" !important;
   }
 }
+
+*::selection {
+  color: white;
+  background: black;
+}

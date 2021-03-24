@@ -15,7 +15,7 @@
   </nav>
 
   <ul class="header_icon-list">
-    <li (click)="openDialog(loginModal)">
+    <li (click)="openSignInModal()">
       <a>
         <svg class="svg" version="1.1" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
           <g>
@@ -95,60 +95,5 @@
       </ul>
     </li>
   </ul>
-
-  <ng-template #loginModal class="login-modal-wrapper">
-
-    <div class="login-modal-container">
-
-      <h2 mat-dialog-title class="title">Вхід</h2>
-
-      <div class="line-text">
-        <span>або</span>
-      </div>
-
-      <form class="form-group">
-
-        <div class="checkbox-thumbs-wrapper">
-
-          <label class="checkbox-thumb">
-            <input type="radio" name="login_type" checked>
-            <span>Телефон</span>
-          </label>
-
-          <label class="checkbox-thumb">
-            <input type="radio" name="login_type">
-            <span>E-mail</span>
-          </label>
-
-        </div>
-
-        <div class="input-wrapper focus">
-          <span class="floating-label">Телефон*</span>
-          <input type="text" class="input" name="tel">
-        </div>
-
-        <div class="input-wrapper">
-          <span class="floating-label">Пароль*</span>
-          <input type="password" class="input" name="tel">
-        </div>
-
-        <button type="button" class="recovery-btn">Забули пароль?</button>
-
-        <button type="button" class="btn-red sing-in-btn disabled">Увійти</button>
-
-      </form>
-
-      <div class="bottom-text">
-        <p>
-          Не маєш акаунту?
-          <button type="button" class="btn-sign-up">Зареєструватись</button>
-        </p>
-      </div>
-
-    </div>
-
-    <button type="button" class="btn-close" (click)="closeDialog()"></button>
-
-  </ng-template>
 
 </div>

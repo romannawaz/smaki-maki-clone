@@ -1,7 +1,8 @@
-<div class="body">
-  <header>
-    <app-header-top></app-header-top>
-    <app-header-side></app-header-side>
+<div class="content-block" [ngClass]="{'fixed': headerStatus}">
+  <header [ngClass]="{'active': headerStatus}">
+    <app-header-top (headerStatus)="checkHeaderStatus($event)"></app-header-top>
+    <app-header-full (headerStatus)="checkHeaderStatus($event)"></app-header-full>
+    <app-header-side (headerStatus)="checkHeaderStatus($event)"></app-header-side>
   </header>
 
   <main>

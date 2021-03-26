@@ -35,7 +35,7 @@ import { AdminProductComponent } from './admin/admin-product/admin-product.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
-import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
+import { AdminTypeComponent } from './admin/admin-type/admin-type.component'; 
 import { AdminVacanciesComponent } from './admin/admin-vacancies/admin-vacancies.component';
 import { AdminDiscountComponent } from './admin/admin-discount/admin-discount.component';
 
@@ -65,6 +65,7 @@ import { SwiperModule } from 'swiper/angular';
 
 // Pagination
 import { NgxPaginationModule } from 'ngx-pagination';
+import { HeaderFullComponent } from './components/header-full/header-full.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AdminDiscountComponent,
     ModalSignInComponent,
     ModalSignUpComponent,
+    HeaderFullComponent,
   ],
   imports: [
     BrowserModule,

@@ -24,10 +24,6 @@ export class ModalSignInComponent {
     this.dialog.closeAll();
 
     const dialogRef = this.dialog.open(ModalSignUpComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   signInUser(): void {

@@ -29,12 +29,11 @@
   }
 }
 
-html,
-.body {
+.content-block {
   height: 100%;
 }
 
-.body {
+.content-block {
   display: flex;
   flex-direction: column;
 }
@@ -95,6 +94,9 @@ img {
 html,
 body {
   height: 100%;
+}
+html {
+  overflow-y: scroll;
 }
 body {
   margin: 0;

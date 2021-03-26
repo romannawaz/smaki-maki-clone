@@ -13,10 +13,10 @@
 
   overflow: hidden;
 
-  background-color: #000;
+  background-color: #22262a;
 
   z-index: 10;
-  
+
   &::before {
     content: "";
     width: calc(192px / 2);

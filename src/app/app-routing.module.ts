@@ -23,12 +23,14 @@ import { AdminDiscountComponent } from './admin/admin-discount/admin-discount.co
 // Guards
 import { AdminGuard } from './shared/guards/admin.guard';
 
+import { VacanciesResolver } from './shared/resolves/vacancies.resolver';
+
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
   { path: 'about', component: AboutComponent },
   { path: 'delivery', component: DeliveryComponent },
   { path: 'discount', component: DiscountComponent },
-  { path: 'vacancies', component: VacanciesComponent },
+  { path: 'vacancies', component: VacanciesComponent, resolve: { vacancies: VacanciesResolver } },
   { path: 'admin-login', component: AdminLoginComponent },
   {
     path: 'products/:category', component: ProductsComponent, children: [

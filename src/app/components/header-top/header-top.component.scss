@@ -72,6 +72,26 @@ $light-red: #ed3544;
   }
 }
 
+::ng-deep header {
+  &.active {
+    .hamburger {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .header_top {
+      box-shadow: none;
+    }
+
+    .header_top-nav,
+    .header_top-center,
+    .header_icon-list {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
 .hamburger {
   cursor: pointer;
 
@@ -93,6 +113,10 @@ $light-red: #ed3544;
 
   &:hover {
     transform: rotate(90deg);
+  }
+
+  &:active {
+    transform: rotate(90deg) translateX(3px);
   }
 
   @media screen and (max-width: 1199px) {

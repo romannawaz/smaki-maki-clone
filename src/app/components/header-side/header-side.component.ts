@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalSignInComponent } from 'src/app/pages/modal-sign-in/modal-sign-in.component';
 
 // Interafaces
@@ -23,6 +23,8 @@ import { MatDialog } from '@angular/material/dialog';
   viewProviders: [ScrollDirective]
 })
 export class HeaderSideComponent implements OnInit {
+
+  @Output() headerStatus = new EventEmitter<boolean>();
 
   categories: ICategory[] = [];
 
@@ -54,5 +56,9 @@ export class HeaderSideComponent implements OnInit {
       .subscribe(data => {
         this.categories = data;
       });
+  }
+
+  hideHeaderSide(): void {
+    this.headerStatus.emit(true);
   }
 }

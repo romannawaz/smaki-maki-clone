@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ScrollDirective } from 'src/app/shared/directives/scroll.directive';
 
 @Component({
@@ -9,8 +9,14 @@ import { ScrollDirective } from 'src/app/shared/directives/scroll.directive';
 })
 export class HeaderTopComponent implements OnInit {
 
+  @Output() headerStatus = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void { }
+
+  closeFullSizeHeader(): void {
+    this.headerStatus.emit(false);
+  }
 
 }

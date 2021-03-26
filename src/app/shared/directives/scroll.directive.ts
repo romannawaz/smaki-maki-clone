@@ -7,7 +7,6 @@ export class ScrollDirective {
 
   scrollTop: number;
 
-
   constructor(
     private renderer: Renderer2,
     private element: ElementRef
@@ -15,7 +14,6 @@ export class ScrollDirective {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event) {
-
     if (this.scrollTop > $event.target['scrollingElement'].scrollTop) {
       this.renderer.addClass(this.element.nativeElement, 'scrollUp');
       this.renderer.removeClass(this.element.nativeElement, 'scrollDown');

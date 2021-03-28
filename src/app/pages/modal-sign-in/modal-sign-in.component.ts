@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { UserAuthService } from 'src/app/shared/services/auth/user-auth.service';
 
 import { ModalSignUpComponent } from '../modal-sign-up/modal-sign-up.component';
 
@@ -16,18 +16,20 @@ export class ModalSignInComponent {
   signInPassword: string;
 
   constructor(
-    private auth: AuthService,
+    private auth: UserAuthService,
     private dialog: MatDialog
   ) { }
 
   openSignUpModal() {
     this.dialog.closeAll();
 
-    const dialogRef = this.dialog.open(ModalSignUpComponent);
+    this.dialog.open(ModalSignUpComponent);
   }
 
   signInUser(): void {
     this.auth.signInUser(this.signInEmail, this.signInPassword);
+
+    this.dialog.closeAll();
   }
 
 }

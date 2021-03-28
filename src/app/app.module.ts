@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 
 // Components
 import { HeaderTopComponent } from './components/header-top/header-top.component';
+import { HeaderFullComponent } from './components/header-full/header-full.component';
 import { HeaderSideComponent } from './components/header-side/header-side.component';
 
 // Pages
@@ -24,6 +25,12 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
+// User
+import { UserCabinetComponent } from './pages/user-cabinet/user-cabinet.component';
+import { UserOrdersComponent } from './pages/user-cabinet/user-orders/user-orders.component';
+import { UserProfileComponent } from './pages/user-cabinet/user-profile/user-profile.component';
+import { UserTrackerComponent } from './pages/user-cabinet/user-tracker/user-tracker.component';
+
 // Modal
 import { ModalSignInComponent } from './pages/modal-sign-in/modal-sign-in.component';
 import { ModalSignUpComponent } from './pages/modal-sign-up/modal-sign-up.component';
@@ -35,7 +42,7 @@ import { AdminProductComponent } from './admin/admin-product/admin-product.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminCategoryComponent } from './admin/admin-category/admin-category.component';
 import { AdminSubcategoryComponent } from './admin/admin-subcategory/admin-subcategory.component';
-import { AdminTypeComponent } from './admin/admin-type/admin-type.component'; 
+import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
 import { AdminVacanciesComponent } from './admin/admin-vacancies/admin-vacancies.component';
 import { AdminDiscountComponent } from './admin/admin-discount/admin-discount.component';
 
@@ -65,7 +72,6 @@ import { SwiperModule } from 'swiper/angular';
 
 // Pagination
 import { NgxPaginationModule } from 'ngx-pagination';
-import { HeaderFullComponent } from './components/header-full/header-full.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +99,10 @@ import { HeaderFullComponent } from './components/header-full/header-full.compon
     ModalSignInComponent,
     ModalSignUpComponent,
     HeaderFullComponent,
+    UserCabinetComponent,
+    UserOrdersComponent,
+    UserProfileComponent,
+    UserTrackerComponent,
   ],
   imports: [
     BrowserModule,

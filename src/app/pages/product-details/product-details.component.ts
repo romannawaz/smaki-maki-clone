@@ -51,20 +51,12 @@ export class ProductDetailsComponent implements OnInit {
         if (e instanceof NavigationEnd) {
           this.currentProductID = this.activatedRoute.snapshot.paramMap.get('id');
 
-          this.subcategoryUrl = this.activatedRoute.snapshot.paramMap.get('subcategory');
           this.categoryUrl = this.activatedRoute.snapshot.paramMap.get('category');
-
-          this.subcategoryService.getFireCloudSubcategoryByUrlName(this.subcategoryUrl)
-            .snapshotChanges()
-            .pipe(
-              map(changes => changes.map(subcategory => ({ name: subcategory.payload.doc.data().name })))
-            ).
-            subscribe(name => {
-              this.subcategoryName = name[0].name;
-            });
+          this.subcategoryUrl = this.activatedRoute.snapshot.paramMap.get('subcategory');
 
           this.linkBack = `/products/${this.categoryUrl}/${this.subcategoryUrl}`;
-
+          
+          this.getSubcategoryNamyByUrl();
           this.getProductByID();
         }
       });
@@ -82,7 +74,18 @@ export class ProductDetailsComponent implements OnInit {
         this.product = data;
 
         this.getRecommendedProducts();
-      })
+      });
+  }
+
+  getSubcategoryNamyByUrl(): void {
+    this.subcategoryService.getFireCloudSubcategoryByUrlName(this.subcategoryUrl)
+      .snapshotChanges()
+      .pipe(
+        map(changes => changes.map(subcategory => ({ name: subcategory.payload.doc.data().name })))
+      ).
+      subscribe(name => {
+        this.subcategoryName = name[0].name;
+      });
   }
 
   getRecommendedProducts(): void {
@@ -93,7 +96,6 @@ export class ProductDetailsComponent implements OnInit {
       )
       .subscribe(data => {
         this.recommendedProducts = data.filter(product => product.id != this.product.id);
-        console.log(this.recommendedProducts);
-      })
+      });
   }
 }

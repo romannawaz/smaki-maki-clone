@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
 
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
-import { CategoryService } from 'src/app/shared/services/category.service';
+import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
+
+import { Subcategory } from 'src/app/shared/models/subcategory.model';
 
 import { map } from 'rxjs/operators';
-import { Subcategory } from 'src/app/shared/models/subcategory.model';
-import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
-import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-subcategory',
@@ -43,10 +45,6 @@ export class AdminSubcategoryComponent implements OnInit {
     this.getSubcategories();
   }
 
-  // checkTopping(): void {
-  //   console.log(this.toppings.value);
-  // }
-
   resetForm(): void {
     this.name = null;
     this.urlName = null;
@@ -63,6 +61,7 @@ export class AdminSubcategoryComponent implements OnInit {
       )
       .subscribe(data => {
         this.categories = data;
+
         this.categoryArray = data;
       });
   }

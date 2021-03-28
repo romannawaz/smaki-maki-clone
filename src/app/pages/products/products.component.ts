@@ -24,6 +24,8 @@ export class ProductsComponent implements OnInit {
   currentCategory: ICategory;
   currentSubcategory: ISubcategory;
 
+  redirectLink: string;
+
   subcategories: ISubcategory[] = [];
 
   isCategoryChanged: boolean;
@@ -39,18 +41,12 @@ export class ProductsComponent implements OnInit {
         if (e instanceof NavigationEnd) {
           this.subcategories = null;
           this.isCategoryChanged = true;
-          // console.log(this.activatedRoute?.snapshot?.children[0]?.params?.subcategory);
 
           if (this.activatedRoute?.snapshot?.children[0]?.params?.subcategory) {
             this.isCategoryChanged = false;
           }
 
-          // if (this.currentProductPage != this.activatedRoute.snapshot.paramMap.get('category')) {
           this.currentProductPage = this.activatedRoute.snapshot.paramMap.get('category');
-          // }
-          // else {
-          //   this.isCategoryChanged = false;
-          // }
 
           this.getCurrentCategory();
         }
@@ -58,7 +54,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCurrentCategory();
+    // this.getCurrentCategory();
   }
 
   getCurrentCategory(): void {
@@ -86,8 +82,10 @@ export class ProductsComponent implements OnInit {
         if (data && data.length > 0) {
           this.subcategories = data;
 
+          this.redirectLink = `/products/${this.currentProductPage}/${this.subcategories[0].urlName}`;
+
           if (this.isCategoryChanged) {
-            this.route.navigateByUrl(`/products/${this.currentProductPage}/${this.subcategories[0].urlName}`);
+            this.route.navigateByUrl(this.redirectLink);
           }
         }
       });

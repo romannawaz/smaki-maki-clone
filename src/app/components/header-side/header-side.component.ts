@@ -6,6 +6,7 @@ import { ICategory } from 'src/app/shared/interfaces/category.interface';
 
 // Services
 import { CategoryService } from 'src/app/shared/services/category.service';
+import { UserAuthService } from 'src/app/shared/services/auth/user-auth.service';
 
 // Directives
 import { ScrollDirective } from 'src/app/shared/directives/scroll.directive';
@@ -28,21 +29,25 @@ export class HeaderSideComponent implements OnInit {
 
   categories: ICategory[] = [];
 
+  userLoggedState: boolean;
+
   constructor(
+    private userAuthService: UserAuthService,
     private categoryService: CategoryService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.getCategories();
+
+    this.userAuthService.getStateChanges()
+      .subscribe(state => {
+        this.userLoggedState = state;
+      });
   }
 
   openSignInModal() {
-    const dialogRef = this.dialog.open(ModalSignInComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(ModalSignInComponent);
   }
 
   getCategories(): void {

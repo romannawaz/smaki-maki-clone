@@ -1,0 +1,231 @@
+.cabinet_wrapper {
+  display: block;
+  position: relative;
+  margin-bottom: auto;
+}
+
+.account {
+  position: relative;
+
+  margin-bottom: 20px;
+
+  background-color: #fff;
+
+  overflow: hidden;
+}
+
+.account_top {
+  padding: 40px 25px 25px;
+
+  .upload_wrap {
+    margin-bottom: 20px;
+
+    text-align: center;
+  }
+
+  .account_avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+
+    margin: 0 auto 10px;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+
+    overflow: hidden;
+  }
+}
+
+.simple-link {
+  cursor: pointer;
+
+  position: relative;
+  display: inline-block;
+
+  font-family: "Montserrat Medium";
+  font-size: 15px;
+  line-height: 16px;
+
+  color: #ed3544;
+
+  transition: all 0.25s ease;
+
+  input[type="file"] {
+    cursor: pointer;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    font-size: 0;
+    border: none;
+  }
+}
+
+.account_list {
+  font-family: "Montserrat Regular";
+
+  li {
+    font-size: 15px;
+
+    &:first-child {
+      font-size: 17px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.account_bottom {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 20px 25px;
+
+  font-family: "Montserrat Bold";
+
+  color: #fff;
+  background-color: #ed3544;
+  text-transform: uppercase;
+
+  span:last-child {
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+}
+
+.account_bonus-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account_info {
+  position: relative;
+
+  padding-top: 30px;
+
+  background-color: #fff;
+}
+
+.tab-menu-wrap {
+  position: relative;
+}
+
+.tabs-toggle {
+  display: flex;
+  border-bottom: 1px solid rgba(152, 152, 157, 0.5);
+
+  .tab-menu {
+    position: relative;
+    text-align: center;
+
+    flex: 1;
+
+    a {
+      cursor: pointer;
+
+      display: block;
+
+      padding: 10px;
+
+      font-family: "Montserrat Medium";
+      font-size: 17px;
+      line-height: 1.2;
+
+      color: #22262a;
+
+      &.active {
+        font-family: "Montserrat Bold";
+
+        &:before {
+          transform: scaleY(1);
+        }
+      }
+
+      &.disabled {
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      &:hover {
+        &:before {
+          transform: scaleY(1);
+        }
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        height: 2px;
+        background-color: #ed3544;
+        transition: all 0.25s ease;
+        transform-origin: top;
+        transform: scaleY(0);
+      }
+    }
+  }
+}
+
+.tab-entry-wrap {
+  position: relative;
+  padding: 40px 45px;
+}
+
+// Helpers
+.item-shadow {
+  box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+}
+
+.item-radius {
+  border-radius: 10px;
+}
+
+.img-decor {
+  position: absolute;
+  left: 60px;
+  bottom: -30px;
+
+  pointer-events: none;
+}
+
+.h4 {
+  margin-bottom: 20px;
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.page-offset {
+  margin-top: 30px;
+}
+
+.text {
+  font-size: 17px;
+  line-height: 1.6em;
+}
+
+.text-s {
+  font-size: 15px;
+  line-height: 1.6em;
+}
+
+.text-xs {
+  font-size: 13px;
+  line-height: 1.6em;
+}
+
+.color-grey {
+  color: #98989d;
+}

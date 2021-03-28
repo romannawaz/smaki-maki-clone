@@ -1,17 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
+import { AngularFireStorage } from '@angular/fire/storage';
+
+// Model
+import { Product } from 'src/app/shared/models/product.model';
+
+// Intefaces
 import { ICategory } from 'src/app/shared/interfaces/category.interface';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
 import { IType } from 'src/app/shared/interfaces/type.interface';
-import { Product } from 'src/app/shared/models/product.model';
+
+// Services
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
 import { TypeService } from 'src/app/shared/services/type.service';
+
+// rsjx operators
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-product',
@@ -42,6 +51,7 @@ export class AdminProductComponent implements OnInit {
 
   pathToSmallImage: string;
   pathToBigImage: string;
+
   uploadPercentSmallImage: Observable<number>;
   uploadPercentBigImage: Observable<number>;
 
@@ -60,8 +70,6 @@ export class AdminProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.getSubcategories();
-    this.getTypes();
 
     this.getProducts();
   }
@@ -80,7 +88,7 @@ export class AdminProductComponent implements OnInit {
     this.fileInputSmallImage = null;
     this.fileInputBigImage = null;
   }
-
+  
   getCategories(): void {
     this.categoryService.getFireCloudCategories()
       .snapshotChanges()
@@ -89,29 +97,31 @@ export class AdminProductComponent implements OnInit {
       )
       .subscribe(data => {
         this.categories = data;
-      })
+      });
   }
 
   getSubcategories(): void {
-    this.subcategoryService.getFireCloudSubcategories()
+    this.types = null;
+
+    this.subcategoryService.getFireCloudSubcategoriesByCategoryID(this.categoryID)
       .snapshotChanges()
       .pipe(
         map(changes => changes.map(subcat => ({ id: subcat.payload.doc.id, ...subcat.payload.doc.data() })))
       )
       .subscribe(data => {
         this.subcategories = data;
-      })
+      });
   }
 
   getTypes(): void {
-    this.typeService.getFireCloudTypes()
+    this.typeService.getFireCloudTypesBySubcategoryID(this.subcategoryID)
       .snapshotChanges()
       .pipe(
         map(changes => changes.map(type => ({ id: type.payload.doc.id, ...type.payload.doc.data() })))
       )
       .subscribe(data => {
         this.types = data;
-      });
+      })
   }
 
   uploadFile($event, folder: string): void {
@@ -172,6 +182,9 @@ export class AdminProductComponent implements OnInit {
 
     this.updateProductID = id;
     this.updateStatus = true;
+
+    this.getSubcategories();
+    this.getTypes();
   }
 
   deleteProduct(id: string): void {

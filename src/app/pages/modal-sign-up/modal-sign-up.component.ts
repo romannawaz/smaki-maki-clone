@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { UserAuthService } from 'src/app/shared/services/auth/user-auth.service';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -17,7 +17,7 @@ export class ModalSignUpComponent {
   signUpPassword: string;
 
   constructor(
-    private auth: AuthService,
+    private auth: UserAuthService,
     private dialog: MatDialog
   ) { }
 

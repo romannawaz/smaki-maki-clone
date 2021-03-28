@@ -6,9 +6,9 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { VacancyService } from '../services/vacancy.service';
+
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -277,6 +277,8 @@ $light-red: #ed3544;
     margin-right: 15px;
 
     li {
+      cursor: pointer;
+
       display: inline-block;
       font-size: 0;
       vertical-align: middle;
@@ -290,9 +292,19 @@ $light-red: #ed3544;
 
         width: 40px;
         height: 40px;
+
+        transition: all 0.25s ease;
+
+        svg path {
+          transition: all 0.25s ease;
+        }
       }
 
       &:hover {
+        a {
+          color: $light-red;
+        }
+
         .svg {
           path {
             fill: $light-red;
@@ -413,5 +425,30 @@ $light-red: #ed3544;
 
   &:active {
     transform: translateY(3px);
+  }
+}
+
+// If user logged
+
+.user-log {
+  width: auto;
+  margin-right: 25px;
+
+  .bonus {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    font-family: "Montserrat Regular";
+    font-size: 17px;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    svg + span {
+      display: inline-block;
+      margin-left: 3px;
+    }
   }
 }

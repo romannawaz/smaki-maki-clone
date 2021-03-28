@@ -24,7 +24,7 @@
     <mat-form-field class="full-width">
       <mat-label>Choose category</mat-label>
       <mat-select [(ngModel)]="categoryID" name="categoryID">
-        <mat-option *ngFor="let category of categories" [value]="category.id">
+        <mat-option *ngFor="let category of categories" [value]="category.id" (click)="getSubcategories()">
           {{ category.name }}
         </mat-option>
       </mat-select>
@@ -32,16 +32,18 @@
 
     <mat-form-field class="full-width">
       <mat-label>Choose subcategory</mat-label>
-      <mat-select [(ngModel)]="subcategoryID" name="subcategoryID">
-        <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+      <mat-select [(ngModel)]="subcategoryID" name="subcategoryID"
+        [disabled]="categoryID && subcategories.length > 0 ? false : true">
+        <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id" (click)="getTypes()">
           {{ subcategory.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field *ngIf="types" class="full-width">
+    <mat-form-field class="full-width">
       <mat-label>Choose types</mat-label>
-      <mat-select [formControl]="typesID" multiple>
+      <mat-select [formControl]="typesID" [disabled]="subcategoryID && types && types.length > 0 ? false : true"
+        multiple>
         <mat-select-trigger>
           Selected {{ typesID.value ? typesID.value.length : '' }} types
         </mat-select-trigger>
@@ -66,7 +68,8 @@
       <mat-progress-bar mode="determinate" [value]="(uploadPercentBigImage | async)"></mat-progress-bar>
     </div>
 
-    <button mat-stroked-button type="submit" class="full-width">Add new product</button>
+    <button mat-stroked-button type="submit"
+      class="full-width">{{ updateStatus ? 'Update product' : 'Add new product'}}</button>
 
   </form>
 

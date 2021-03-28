@@ -232,11 +232,15 @@ $dark-grey: #22262a;
       height: 40px;
       width: 40px;
 
+      transition: all 0.25s ease;
+
       svg path {
         transition: all 0.25s ease;
       }
 
       &:hover {
+        color: $light-red;
+
         svg {
           path {
             fill: $light-red;
@@ -272,4 +276,44 @@ $dark-grey: #22262a;
 
 .hidden {
   transform: translateX(-100%);
+}
+
+.user-log {
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: auto;
+
+  margin-right: 0;
+  margin-bottom: 15px;
+
+  .avatar {
+    margin-right: 0;
+    margin-bottom: 8px;
+
+    min-width: 42px;
+    min-height: 42px;
+    border-radius: 50%;
+
+    overflow: hidden;
+  }
+
+  .bonus {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    font-family: "Montserrat Regular";
+    font-size: 17px;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    svg + span {
+      display: inline-block;
+      margin-left: 3px;
+    }
+  }
 }

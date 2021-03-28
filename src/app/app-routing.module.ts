@@ -10,6 +10,12 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
+// User
+import { UserCabinetComponent } from './pages/user-cabinet/user-cabinet.component';
+import { UserOrdersComponent } from './pages/user-cabinet/user-orders/user-orders.component';
+import { UserProfileComponent } from './pages/user-cabinet/user-profile/user-profile.component';
+import { UserTrackerComponent } from './pages/user-cabinet/user-tracker/user-tracker.component';
+
 // Admin
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminComponent } from './admin/admin.component';
@@ -24,6 +30,7 @@ import { AdminDiscountComponent } from './admin/admin-discount/admin-discount.co
 import { AdminGuard } from './shared/guards/admin.guard';
 
 import { VacanciesResolver } from './shared/resolves/vacancies.resolver';
+import { UserGuard } from './shared/guards/user.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
@@ -47,6 +54,14 @@ const routes: Routes = [
       { path: 'product', component: AdminProductComponent },
       { path: 'vacancies', component: AdminVacanciesComponent },
       { path: 'discounts', component: AdminDiscountComponent }
+    ]
+  },
+  {
+    path: 'cabinet', component: UserCabinetComponent, canActivate: [UserGuard], children: [
+      { path: '', pathMatch: 'full', redirectTo: 'orders' },
+      { path: 'orders', component: UserOrdersComponent },
+      { path: 'profile', component: UserProfileComponent },
+      { path: 'tracker', component: UserTrackerComponent }
     ]
   }
 ];

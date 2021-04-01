@@ -24,6 +24,7 @@ import { CurrentDiscountComponent } from './pages/current-discount/current-disco
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { OrderComponent } from './pages/order/order.component';
 
 // User
 import { UserCabinetComponent } from './pages/user-cabinet/user-cabinet.component';
@@ -34,6 +35,7 @@ import { UserTrackerComponent } from './pages/user-cabinet/user-tracker/user-tra
 // Modal
 import { ModalSignInComponent } from './pages/modal-sign-in/modal-sign-in.component';
 import { ModalSignUpComponent } from './pages/modal-sign-up/modal-sign-up.component';
+import { BasketComponent } from './pages/basket/basket.component';
 
 // Admin
 import { AdminLoginComponent } from './admin-login/admin-login.component';
@@ -103,6 +105,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     UserOrdersComponent,
     UserProfileComponent,
     UserTrackerComponent,
+    BasketComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

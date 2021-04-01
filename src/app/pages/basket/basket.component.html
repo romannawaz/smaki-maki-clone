@@ -1,0 +1,73 @@
+<div class="basket-modal-wrapper">
+  <div class="basket-modal-container">
+    <div class="basket_inner cart-items">
+      <div class="basket_title h5">
+        <b>Кошик</b>
+      </div>
+
+      <div class="basket_pr adv-basket-item" *ngFor="let item of basket">
+        <a href="#" class="basket_pr-img">
+          <img [src]="item.product.image">
+        </a>
+
+        <div class="basket_pr-content">
+          <div class="basket_pr-weight">{{ item.product.weight }}</div>
+
+          <a href="#" class="basket_pr-title h6">
+            <b>{{ item.product.name }}</b>
+          </a>
+        </div>
+
+        <div class="basket_pr-controls">
+          <div class="thumb-input-number">
+            <button type="button" class="decrement" (click)="changeTheCountOfProduct(item.product.id, false)"></button>
+            <span class="product_count">{{ getTheCountOfProduct(item.product.id) }}</span>
+            <button type="button" class="increment" (click)="changeTheCountOfProduct(item.product.id, true)"></button>
+          </div>
+
+          <div class="basket_pr-total">
+            <b>{{ totalPriceOfSingleProduct(item.product.id) }}
+              <span class="symbol-price">грн</span>
+            </b>
+          </div>
+        </div>
+
+        <button type="button" class="basket_pr-btn-close" (click)="removeItemFromBasket(item.product.id)"></button>
+      </div>
+
+    </div>
+
+    <div class="basket_summary text text-center">
+      <div class="basket_summary-top cart-total-wrapper-top">
+        <div class="cart-total-wrapper">
+          <div class="basket_sum">
+            <b>До сплати: </b>
+            <b>{{ generalPrice }} грн</b>
+          </div>
+        </div>
+
+        <div class="basket_bonuses" *ngIf="generalPrice > 250">
+          <span>
+            Бонуси за замовлення:
+            <img src="/assets/images/icon-list-money-black.svg">
+          </span>
+          <b>{{ bonuses }}</b>
+        </div>
+      </div>
+
+      <div class="basket_summary-top" *ngIf="generalPrice < 250" style="display: flex;">
+        Сума мінімального замовлення в межах міста - 250 грн, за межами - 600 грн. В суму мінімального замовлення не
+        входять напої.
+      </div>
+
+      <button type="button" class="btn-red go-to-checkout" [class.disabled]="generalPrice < 250" (click)="toOrder()">
+        оформити замовлення
+      </button>
+    </div>
+  </div>
+
+  <button mat-dialog-close class="btn-close">
+    <img src="/assets/icons/icon-close.svg">
+  </button>
+
+</div>

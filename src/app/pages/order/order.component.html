@@ -1,0 +1,133 @@
+<div class="order-wrapper">
+  <div class="container page-offset">
+    <h1 class="page-title h4 text-center">
+      <b>Оформити замовлення</b>
+    </h1>
+
+    <div class="empty_fields_error">
+      Перевірте дані ще раз
+    </div>
+
+    <form class="form-group">
+      <div class="row">
+        <div class="col-12 col-xl-6">
+          <div class="item-radius-sm item-shadow-sm">
+            <div class="title h6">
+              <b>Персональні дані</b>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Ім'я *</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Телефон *</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Ел. скринька</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="item-radius-sm item-shadow-sm">
+            <div class="row">
+              <div class="col-md-4">
+                <!-- <label class="input-wrapper">
+                  <span class="floating-label">Ім'я *</span>
+                  <input type="text" class="input">
+                </label> -->
+              </div>
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Вулиця *</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Будинок *</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Будинок</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Під'їзд</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="input-wrapper">
+                  <span class="floating-label">Поверх</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+              <div class="col-md-8">
+                <label class="input-wrapper">
+                  <span class="floating-label">Коментар</span>
+                  <input type="text" class="input">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="item-radius-sm item-shadow-sm"></div>
+        </div>
+
+        <div class="col-12 col-lg-10 offset-lg-1 col-xl-5 offset-xl-1 order-page-bottom">
+          <div class="title h6">
+            <b>Ваше замовлення</b>
+          </div>
+
+          <div class="basket_pr-wrap order-basket" *ngFor="let item of basket">
+            <div class="basket_pr">
+              <a href="#" class="basket_pr-img">
+                <img [src]="item.product.image">
+              </a>
+
+              <div class="basket_pr-content">
+                <div class="basket_pr-weight">{{ item.product.weight }}</div>
+
+                <a href="#" class="basket_pr-title h6">
+                  <b>{{ item.product.name }}</b>
+                </a>
+              </div>
+
+              <div class="basket_pr-controls">
+                <div class="thumb-input-number">
+                  <button type="button" class="decrement"
+                    (click)="changeTheCountOfProduct(item.product.id, false)"></button>
+                  <span class="product_count">{{ getTheCountOfProduct(item.product.id) }}</span>
+                  <button type="button" class="increment"
+                    (click)="changeTheCountOfProduct(item.product.id, true)"></button>
+                </div>
+
+                <div class="basket_pr-total">
+                  <b>{{ totalPriceOfSingleProduct(item.product.id) }}
+                    <span class="symbol-price">грн</span>
+                  </b>
+                </div>
+              </div>
+
+              <button type="button" class="basket_pr-btn-close"
+                (click)="removeItemFromBasket(item.product.id)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

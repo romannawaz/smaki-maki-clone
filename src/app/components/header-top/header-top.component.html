@@ -133,11 +133,11 @@
           </li>
         </ul>
 
-        <button type="button" class="cart-icon">
-          <span class="amount">0</span>
+        <button type="button" class="cart-icon" (click)="openBasketModal()">
+          <span class="amount">{{ generalCountOfProducts }}</span>
           <span class="price">
             <span>
-              0
+              {{ totalPriceOfProducts }}
               <span class="symbol-price">грн</span>
             </span>
           </span>

@@ -1,6 +1,6 @@
 import { IProduct } from "./product.interface";
 
 export interface IBasket {
-    products: IProduct[],
-    count: string
+    product: IProduct,
+    count: number
 }

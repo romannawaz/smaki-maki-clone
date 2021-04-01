@@ -9,6 +9,7 @@ import { VacanciesComponent } from './pages/vacancies/vacancies.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { OrderComponent } from './pages/order/order.component';
 
 // User
 import { UserCabinetComponent } from './pages/user-cabinet/user-cabinet.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'delivery', component: DeliveryComponent },
   { path: 'discount', component: DiscountComponent },
   { path: 'vacancies', component: VacanciesComponent, resolve: { vacancies: VacanciesResolver } },
+  { path: 'order', component: OrderComponent },
   { path: 'admin-login', component: AdminLoginComponent },
   {
     path: 'products/:category', component: ProductsComponent, children: [

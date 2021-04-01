@@ -37,9 +37,18 @@
               class="symbol-price">{{ product.price.split(' ')[1] }}</span></span>
 
           <div class="product_controls_inner">
-            <button type="button" class="btn btn-sm buy-button addBtn">
-              Купити
-            </button>
+            <ng-container *ngIf="!checkAvailableProduct(product.id); else elseTemplate">
+              <button type="button" class="btn btn-sm buy-button addBtn" (click)="addProductToBasket(product)">
+                Купити
+              </button>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div class="thumb-input-number d-flex align-items-center mb-0">
+                <button type="button" class="decrement" (click)="changeTheCountOfProduct(product.id, false)"></button>
+                <span class="product_count">{{ getTheCountOfProduct(product.id) }}</span>
+                <button type="button" class="increment" (click)="changeTheCountOfProduct(product.id, true)"></button>
+              </div>
+            </ng-template>
           </div>
         </div>
 

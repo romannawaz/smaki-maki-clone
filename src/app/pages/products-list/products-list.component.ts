@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ISubcategory } from 'src/app/shared/interfaces/subcategory.interface';
 import { IType } from 'src/app/shared/interfaces/type.interface';
+import { BasketService } from 'src/app/shared/services/basket.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SubcategoryService } from 'src/app/shared/services/subcategory.service';
 import { TypeService } from 'src/app/shared/services/type.service';
@@ -15,6 +16,7 @@ import { TypeService } from 'src/app/shared/services/type.service';
   styleUrls: ['./products-list.component.scss']
 })
 export class ProductsListComponent implements OnInit {
+
   currentSubcategoryUrlName: string;
 
   currentSubcategory: ISubcategory;
@@ -28,6 +30,7 @@ export class ProductsListComponent implements OnInit {
     private fb: FormBuilder,
     private subcategoryService: SubcategoryService,
     private typeService: TypeService,
+    private basketService: BasketService,
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private route: Router
@@ -84,17 +87,6 @@ export class ProductsListComponent implements OnInit {
 
   // -----------
 
-  // getProductsByCategoryID(): void {
-  //   this.productService.getFireCloudProductsByCategoryID(this.currentCategory.id)
-  //     .snapshotChanges()
-  //     .pipe(
-  //       map(changes => changes.map(product => ({ id: product.payload.doc.id, ...product.payload.doc.data() })))
-  //     )
-  //     .subscribe(data => {
-  //       this.products = data;
-  //     });
-  // }
-
   getProductBySubcategoryID(): void {
     this.productService.getFireCloudProductsBySubcategoryID(this.currentSubcategory.id)
       .snapshotChanges()
@@ -122,6 +114,24 @@ export class ProductsListComponent implements OnInit {
           this.products = data;
         });
     }
+  }
+
+  // Basket
+
+  addProductToBasket(product: IProduct) {
+    this.basketService.addProductToBasket(product);
+  }
+
+  checkAvailableProduct(id: string): boolean {
+    return this.basketService.checkProductAvailability(id) != -1;
+  }
+
+  changeTheCountOfProduct(id: string, operation: boolean): void {
+    this.basketService.changeTheCountOfProduct(id, operation);
+  }
+
+  getTheCountOfProduct(id: string): number {
+    return this.basketService.getTheCountOfProduct(id);
   }
 
 }

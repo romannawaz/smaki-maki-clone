@@ -6,6 +6,7 @@ import { Category } from 'src/app/shared/models/category.model';
 import { CategoryService } from 'src/app/shared/services/category.service';
 
 import { map } from 'rxjs/operators';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-category',
@@ -13,19 +14,24 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./admin-category.component.scss']
 })
 export class AdminCategoryComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'urlName', 'icon', 'element', 'id'];
+  displayedColumns: string[] = ['name', 'urlName', 'icon', 'edit', 'delete'];
 
   categories: ICategory[];
 
-  name: string;
-  urlName: string;
-  fileInput: File;
+  iconName: string;
   pathToIcon: string;
 
   updatedElementID: string;
   updateStatus: boolean;
 
   uploadPercentIcon: Observable<number>;
+
+  // FormControl
+  categoryForm: FormGroup = new FormGroup({
+    name: new FormControl('', { validators: [Validators.required] }),
+    urlName: new FormControl('', { validators: [Validators.required] }),
+    image: new FormControl(null, { validators: [Validators.required] })
+  });
 
   constructor(
     private storage: AngularFireStorage,
@@ -36,21 +42,21 @@ export class AdminCategoryComponent implements OnInit {
     this.getCategories();
   }
 
-  resetForm(): void {
-    this.name = '';
-    this.urlName = '';
-    this.pathToIcon = '';
+  resetForm(formDirective: FormGroupDirective): void {
+    formDirective.resetForm();
 
-    this.fileInput = null;
+    this.categoryForm.reset();
+
+    this.iconName = '';
+    this.pathToIcon = '';
+    this.uploadPercentIcon = null;
   }
 
   getCategories(): void {
     this.categoryService.getFireCloudCategories()
       .snapshotChanges()
       .pipe(
-        map(changes => {
-          return changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }));
-        })
+        map(changes => changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() })))
       )
       .subscribe(data => {
         this.categories = data;
@@ -58,23 +64,66 @@ export class AdminCategoryComponent implements OnInit {
   }
 
   addNewCategory(): void {
-    const newCategory = new Category(this.name, this.urlName, this.pathToIcon);
+    if (this.categoryForm.valid) {
+      let { name, urlName } = this.categoryForm.value;
 
-    if (!this.updateStatus) {
-      this.categoryService.addFireCloudCategory(newCategory)
-        .then(() => {
-          console.log('add category success');
-          this.resetForm();
-        })
-        .catch(err => console.log(err));
+      const newCategory = new Category(name, urlName, this.pathToIcon);
+
+      if (!this.updateStatus) {
+        this.categoryService.addFireCloudCategory(newCategory)
+          .then(() => {
+            console.log('add category success');
+          })
+          .catch(err => console.log(err));
+      }
+      else {
+        this.saveChanges();
+      }
     }
     else {
-      this.saveChanges();
+      console.log('form is not valid');
+      return;
     }
   }
 
+  updateCategory(categoryID: string): void {
+    let { id, name, urlName, icon } = this.categories.filter(({ id }) => id == categoryID)[0];
+
+    this.categoryForm.patchValue({ name, urlName });
+
+    this.pathToIcon = icon;
+
+    this.updatedElementID = id;
+    this.updateStatus = true;
+  }
+
+  saveChanges(): void {
+    let { name, urlName } = this.categoryForm.value;
+
+    const updatedCategory = new Category(name, urlName, this.pathToIcon);
+
+    this.categoryService.updateFireCloudCategory(this.updatedElementID, updatedCategory)
+      .then(() => {
+        this.getCategories();
+
+        this.updatedElementID = null;
+        this.updateStatus = false;
+      });
+  }
+
+  deleteCategory(id: string): void {
+    this.categoryService.deleteFireCloudCategory(id)
+      .then(() => this.getCategories());
+  }
+
   uploadFile($event, folder: string): void {
-    const file = $event.target.files[0];
+    if (this.pathToIcon) {
+      this.storage.storage.refFromURL(this.pathToIcon).delete();
+    }
+
+    const file = ($event.target as HTMLInputElement).files[0];
+
+    this.iconName = file.name;
 
     const filePath = `${folder}/${file.name}`;
     const ref = this.storage.ref(filePath);
@@ -90,35 +139,6 @@ export class AdminCategoryComponent implements OnInit {
           this.pathToIcon = url;
         });
     });
-  }
-
-  updateCategory(category: ICategory): void {
-    let { id, name, urlName } = this.categories.filter(({ id }) => id == category.id)[0];
-
-    this.name = name;
-    this.urlName = urlName;
-
-    this.updatedElementID = id;
-    this.updateStatus = true;
-  }
-
-  saveChanges(): void {
-    const updatedCategory = new Category(this.name, this.urlName, this.pathToIcon);
-
-    this.categoryService.updateFireCloudCategory(this.updatedElementID, updatedCategory)
-      .then(() => {
-        this.getCategories();
-
-        this.resetForm();
-
-        this.updatedElementID = null;
-        this.updateStatus = false;
-      });
-  }
-
-  deleteCategory(id: string): void {
-    this.categoryService.deleteFireCloudCategory(id)
-      .then(() => this.getCategories());
   }
 
 }

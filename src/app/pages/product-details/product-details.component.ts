@@ -55,7 +55,7 @@ export class ProductDetailsComponent implements OnInit {
           this.subcategoryUrl = this.activatedRoute.snapshot.paramMap.get('subcategory');
 
           this.linkBack = `/products/${this.categoryUrl}/${this.subcategoryUrl}`;
-          
+
           this.getSubcategoryNamyByUrl();
           this.getProductByID();
         }
@@ -82,8 +82,8 @@ export class ProductDetailsComponent implements OnInit {
       .snapshotChanges()
       .pipe(
         map(changes => changes.map(subcategory => ({ name: subcategory.payload.doc.data().name })))
-      ).
-      subscribe(name => {
+      )
+      .subscribe(name => {
         this.subcategoryName = name[0].name;
       });
   }

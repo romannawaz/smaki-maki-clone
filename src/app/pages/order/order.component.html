@@ -19,19 +19,19 @@
               <div class="col-md-4">
                 <label class="input-wrapper">
                   <span class="floating-label">Ім'я *</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="userName" name="userName">
                 </label>
               </div>
               <div class="col-md-4">
                 <label class="input-wrapper">
                   <span class="floating-label">Телефон *</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="userPhone" name="userPhone">
                 </label>
               </div>
               <div class="col-md-4">
                 <label class="input-wrapper">
                   <span class="floating-label">Ел. скринька</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="userEmail" name="userEmail">
                 </label>
               </div>
             </div>
@@ -40,45 +40,46 @@
           <div class="item-radius-sm item-shadow-sm">
             <div class="row">
               <div class="col-md-4">
+                <!-- Select -->
                 <!-- <label class="input-wrapper">
-                  <span class="floating-label">Ім'я *</span>
+                  <span class="floating-label"> *</span>
                   <input type="text" class="input">
                 </label> -->
               </div>
               <div class="col-md-4">
                 <label class="input-wrapper">
                   <span class="floating-label">Вулиця *</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="street" name="street">
                 </label>
               </div>
               <div class="col-md-4">
                 <label class="input-wrapper">
                   <span class="floating-label">Будинок *</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="house" name="house">
                 </label>
               </div>
               <div class="col-md-4">
                 <label class="input-wrapper">
-                  <span class="floating-label">Будинок</span>
-                  <input type="text" class="input">
+                  <span class="floating-label">Квартира</span>
+                  <input type="text" class="input" [(ngModel)]="apartment" name="apartment">
                 </label>
               </div>
               <div class="col-md-4">
                 <label class="input-wrapper">
                   <span class="floating-label">Під'їзд</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="entrance" name="entrance">
                 </label>
               </div>
               <div class="col-md-4">
                 <label class="input-wrapper">
                   <span class="floating-label">Поверх</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="floor" name="floor">
                 </label>
               </div>
               <div class="col-md-8">
                 <label class="input-wrapper">
                   <span class="floating-label">Коментар</span>
-                  <input type="text" class="input">
+                  <input type="text" class="input" [(ngModel)]="comment" name="comment">
                 </label>
               </div>
             </div>
@@ -125,6 +126,10 @@
               <button type="button" class="basket_pr-btn-close"
                 (click)="removeItemFromBasket(item.product.id)"></button>
             </div>
+          </div>
+
+          <div class="text-center">
+            <button type="button" class="btn-red" (click)="checkout()">Замовити</button>
           </div>
         </div>
       </div>

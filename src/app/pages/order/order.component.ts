@@ -76,9 +76,9 @@ export class OrderComponent implements OnInit {
     );
 
     console.log(newOrder);
-
     this.orderService.addFireCloudOrder(newOrder)
       .then(() => 'order added successful');
 
+    this.basketService.clearBasket();
   }
 }

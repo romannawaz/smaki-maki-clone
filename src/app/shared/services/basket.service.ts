@@ -125,4 +125,10 @@ export class BasketService {
 
     return this.basketProducts[productIndex].count * parseInt(this.basketProducts[productIndex].product.price);
   }
+
+  clearBasket(): void {
+    this.basketProducts = [];
+
+    this.setNextStep();
+  }
 }

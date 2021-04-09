@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 
 // Components
 import { HeaderTopComponent } from './components/header-top/header-top.component';

@@ -1,6 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+html:not(.touch-screen) ::-webkit-scrollbar,
+html:not(.touch-screen)::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html:not(.touch-screen) ::-webkit-scrollbar-thumb,
+html:not(.touch-screen)::-webkit-scrollbar-thumb {
+  background: #ed3544;
+}
+
+html:not(.touch-screen) ::-webkit-scrollbar-track,
+html:not(.touch-screen)::-webkit-scrollbar-track {
+  background: #fff;
+}
+
 @import "~bootstrap/scss/bootstrap";
 @import "~swiper/swiper-bundle";
 

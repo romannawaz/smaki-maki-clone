@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'smaki-maki';
-
   headerStatus: boolean;
 
   lat = 51.678418;

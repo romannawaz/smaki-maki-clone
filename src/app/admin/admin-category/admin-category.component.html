@@ -17,8 +17,8 @@
       <input type="file" class="custom-file-input  mb-1" id="inputIcon" (change)="uploadFile($event, 'icons')"
         formControlName="image">
 
-      <label class="custom-file-label"
-        for="inputIcon">{{ iconName ? iconName : pathToIcon ? 'Old icon is saved' : 'Choose file' }}</label>
+      <label class="custom-file-label" for="inputIcon">{{ iconName ? iconName : pathToIcon ? 'Old icon is saved' :
+        'Choose file' }}</label>
 
       <mat-progress-bar mode="determinate" [value]="(uploadPercentIcon | async)"></mat-progress-bar>
     </div>
@@ -27,8 +27,8 @@
       <img [src]="pathToIcon">
     </div>
 
-    <button mat-stroked-button type="submit"
-      class="full-width">{{ updateStatus ? 'Save Changes' : 'Add new category' }}</button>
+    <button mat-stroked-button type="submit" class="full-width">{{ updateStatus ? 'Save Changes' : 'Add new category'
+      }}</button>
 
   </form>
 

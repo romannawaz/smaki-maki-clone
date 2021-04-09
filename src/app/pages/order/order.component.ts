@@ -75,10 +75,45 @@ export class OrderComponent implements OnInit {
       this.comment
     );
 
-    console.log(newOrder);
+    let productsNames = this.basket.map(
+      product => {
+        return `-${product.product.name}: ${product.count} шт.`;
+      }
+    );
+
+    let string =
+      `
+*You have a new order!*
+
+*Products:*
+${productsNames.join('\n')}
+
+*Contacts:*
+_Name_: ${this.userName}
+_Email_: ${this.userEmail}
+
+*Adress:*
+_Street_: ${this.street}
+_House_: ${this.house}
+_Apartment_: ${this.apartment}
+_Entrance_: ${this.entrance}
+_Floor_: ${this.floor}
+
+*Comment:*
+${this.comment}
+  `;
+
+    let urlString = encodeURIComponent(string);
+
+    fetch(`https://api.telegram.org/bot1678260692:AAGF-vwtzelA3NkudfHtt2H_4HYRLmVBxvI/sendMessage?chat_id=-1001207488424&text=${urlString}&parse_mode=markdown`, {
+      method: 'POST'
+    });
+
+
     this.orderService.addFireCloudOrder(newOrder)
       .then(() => 'order added successful');
 
     this.basketService.clearBasket();
   }
+
 }

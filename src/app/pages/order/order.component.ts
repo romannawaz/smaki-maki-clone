@@ -27,6 +27,8 @@ export class OrderComponent implements OnInit {
 
   basket: IBasket[] = [];
 
+  totalPrice: number;
+
   constructor(
     private basketService: BasketService,
     private orderService: OrderService
@@ -36,6 +38,11 @@ export class OrderComponent implements OnInit {
     this.basketService.getBasketChanges()
       .subscribe(basket => {
         this.basket = basket;
+      });
+
+    this.basketService.getGenetalProductsPriceChanges()
+      .subscribe(price => {
+        this.totalPrice = price;
       });
   }
 

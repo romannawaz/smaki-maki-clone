@@ -17,21 +17,21 @@
             </div>
             <div class="row">
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Ім'я *</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': userName != null && userName != '' }">
                   <input type="text" class="input" [(ngModel)]="userName" name="userName">
+                  <span class="floating-label">Ім'я *</span>
                 </label>
               </div>
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Телефон *</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': userPhone != null && userPhone != '' }">
                   <input type="text" class="input" [(ngModel)]="userPhone" name="userPhone">
+                  <span class="floating-label">Телефон *</span>
                 </label>
               </div>
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Ел. скринька</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': userEmail != null && userEmail != '' }">
                   <input type="text" class="input" [(ngModel)]="userEmail" name="userEmail">
+                  <span class="floating-label">Ел. скринька</span>
                 </label>
               </div>
             </div>
@@ -42,39 +42,39 @@
               <div class="col-md-4">
               </div>
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Вулиця *</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': street != null && street != '' }">
                   <input type="text" class="input" [(ngModel)]="street" name="street">
+                  <span class="floating-label">Вулиця *</span>
                 </label>
               </div>
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Будинок *</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': house != null && house != '' }">
                   <input type="text" class="input" [(ngModel)]="house" name="house">
+                  <span class="floating-label">Будинок *</span>
                 </label>
               </div>
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Квартира</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': apartment != null && apartment != '' }">
                   <input type="text" class="input" [(ngModel)]="apartment" name="apartment">
+                  <span class="floating-label">Квартира</span>
                 </label>
               </div>
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Під'їзд</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': entrance != null && entrance != '' }">
                   <input type="text" class="input" [(ngModel)]="entrance" name="entrance">
+                  <span class="floating-label">Під'їзд</span>
                 </label>
               </div>
               <div class="col-md-4">
-                <label class="input-wrapper">
-                  <span class="floating-label">Поверх</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': floor != null && floor != '' }">
                   <input type="text" class="input" [(ngModel)]="floor" name="floor">
+                  <span class="floating-label">Поверх</span>
                 </label>
               </div>
               <div class="col-md-8">
-                <label class="input-wrapper">
-                  <span class="floating-label">Коментар</span>
+                <label class="input-wrapper" [ngClass]="{ 'focus': comment != null && comment != '' }">
                   <input type="text" class="input" [(ngModel)]="comment" name="comment">
+                  <span class="floating-label">Коментар</span>
                 </label>
               </div>
             </div>
@@ -88,8 +88,8 @@
             <b>Ваше замовлення</b>
           </div>
 
-          <div class="basket_pr-wrap order-basket" *ngFor="let item of basket">
-            <div class="basket_pr">
+          <div class="basket_pr-wrap order-basket">
+            <div class="basket_pr" *ngFor="let item of basket">
               <a href="#" class="basket_pr-img">
                 <img [src]="item.product.image">
               </a>
@@ -123,8 +123,57 @@
             </div>
           </div>
 
+          <div class="error_messages">
+            <div class="error_message" [ngStyle]="{'display': totalPrice > 250 ? 'none' : 'block' }">
+              <b>
+                Сума мінімального замовлення в межах міста - 250 грн, за межами - 600 грн. В суму мінімального
+                замовлення не входять напої.
+              </b>
+            </div>
+          </div>
+
+          <div class="checkout_bottom">
+            <div class="row w-medium checkout_bottom-row align-items-end">
+              <div class="col-sm-6">
+                <div class="checkout_bottom-item">
+                  <span>Використати бонуси</span>
+                  <label class="input-wrapper-bonuses">
+                    <input class="input_bonuses" type="numeric">
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6 order-3 order-sm-2">
+                <div class="checkout_total checkout_bottom-item">
+                  <b>До сплати:</b>
+                  <b class="order_total_price">
+                    <span class="price">{{ totalPrice }}</span> грн
+                  </b>
+                </div>
+              </div>
+              <div class="col-sm-6 order-2 order-sm-3 color-grey">
+                <div class="checkout_bottom-item">
+                  <span>Залишок бонусiв</span>
+                  <b class="bonuses_by_total">
+                    <img src="/assets/images/icon-cash-grey.svg">
+                    <span> {{ 0 }}</span>
+                  </b>
+                </div>
+              </div>
+              <div class="col-sm-6 order-4">
+                <div class="checkout_bottom-item">
+                  <span>Бонуси за замовлення:</span>
+                  <b class="bonuses_by_total">
+                    <img src="/assets/images/icon-list-money-black.svg">
+                    <span>{{ (totalPrice * 0.05).toFixed(2) }}</span>
+                  </b>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="text-center">
-            <button type="button" class="btn-red" (click)="checkout()">Замовити</button>
+            <button type="button" class="btn-red" [ngClass]="{'disabled': totalPrice < 250 }"
+              (click)="checkout()">Замовити</button>
           </div>
         </div>
       </div>

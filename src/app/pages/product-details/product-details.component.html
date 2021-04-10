@@ -103,7 +103,7 @@
           <sup><span class="symbol-price">{{ recommendedProduct.discount.split(' ')[1] }}</span></sup>
         </div>
 
-        <a href="#" class="product_image">
+        <a [routerLink]="[ '/products/sushi/' + '/' + 'rolls' + '/'+  recommendedProduct.id ]" class="product_image">
           <img class="img" [src]="recommendedProduct.image">
         </a>
 

@@ -22,7 +22,8 @@
         <sup><span class="symbol-price">{{ product.discount.split(' ')[1] }}</span></sup>
       </div>
 
-      <a href="#" class="product_image">
+      <a [routerLink]="[ '/products/sushi/' + '/' + currentSubcategory.urlName + '/'+  product.id ]"
+        class="product_image">
         <img class="img" [src]="product.image">
       </a>
 

@@ -29,9 +29,9 @@ import { AdminDiscountComponent } from './admin/admin-discount/admin-discount.co
 
 // Guards
 import { AdminGuard } from './shared/guards/admin.guard';
+import { UserGuard } from './shared/guards/user.guard';
 
 import { VacanciesResolver } from './shared/resolves/vacancies.resolver';
-import { UserGuard } from './shared/guards/user.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },

@@ -2,7 +2,7 @@ import { IBasket } from "./basket.interface";
 
 export interface IOrder {
     userID: string,
-    
+
     userName: string;
     userPhone: string;
     userEmail: string;
@@ -16,6 +16,8 @@ export interface IOrder {
     products: IBasket[];
 
     status: string;
+    shortDescription: string;
+    totalPrice: string;
 
     comment?: string;
 }

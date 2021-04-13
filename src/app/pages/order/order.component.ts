@@ -46,6 +46,20 @@ export class OrderComponent implements OnInit {
       });
   }
 
+  resetForm(): void {
+    this.userName = null;
+    this.userPhone = null;
+    this.userEmail = null;
+
+    this.street = null;
+    this.house = null;
+    this.apartment = null;
+    this.entrance = null;
+    this.floor = null;
+
+    this.comment = null;
+  }
+
   getTheCountOfProduct(id: string): number {
     return this.basketService.getTheCountOfProduct(id);
   }
@@ -82,14 +96,18 @@ export class OrderComponent implements OnInit {
       this.comment
     );
 
-    let productsNames = this.basket.map(
-      product => {
-        return `-${product.product.name}: ${product.count} шт.`;
-      }
-    );
+    console.log(newOrder);
 
-    let string =
-      `
+    this.orderService.addFireCloudOrder(newOrder)
+      .then(() => {
+        let productsNames = this.basket.map(
+          product => {
+            return `-${product.product.name}: ${product.count} шт.`;
+          }
+        );
+
+        let string =
+        `
 *You have a new order!*
 
 *Products:*
@@ -108,19 +126,18 @@ _Floor_: ${this.floor}
 
 *Comment:*
 ${this.comment}
-  `;
+`;
 
-    let urlString = encodeURIComponent(string);
+        let urlString = encodeURIComponent(string);
 
-    fetch(`https://api.telegram.org/bot1678260692:AAGF-vwtzelA3NkudfHtt2H_4HYRLmVBxvI/sendMessage?chat_id=-1001207488424&text=${urlString}&parse_mode=markdown`, {
-      method: 'POST'
-    });
+        fetch(`https://api.telegram.org/bot1678260692:AAGF-vwtzelA3NkudfHtt2H_4HYRLmVBxvI/sendMessage?chat_id=-1001207488424&text=${urlString}&parse_mode=markdown`, {
+          method: 'POST'
+        });
 
+        this.basketService.clearBasket();
+        this.resetForm();
+      });
 
-    this.orderService.addFireCloudOrder(newOrder)
-      .then(() => 'order added successful');
-
-    this.basketService.clearBasket();
   }
 
 }

@@ -1,8 +1,28 @@
-<div *ngFor="let order of orders">
-  <span *ngFor="let product of order.products; index as i">
-    {{ product.product.name }}{{ i + 1 < order.products.length ? ', ' : '.' }}</span>
-</div>
+<div class="orders-wrapper">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="order" *ngFor="let order of orders; index as i">
+        <div class="description">
+          <span class="description_details text-xs">
+            <span>
+              {{ order.shortDescription }}
+            </span>
+          </span>
+        </div>
 
-<!-- <div class="orders-wrapper">
-  
-</div> -->
+        <div class="pay_info">
+          <div class="cart-icon">
+            <span class="price">{{ order.totalPrice }}</span>
+            <img src="/assets/icons/icon-cart.svg">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="order-details">
+        2
+      </div>
+    </div>
+  </div>
+</div>

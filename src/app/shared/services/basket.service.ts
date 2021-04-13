@@ -10,7 +10,9 @@ import { Basket } from '../models/basket.model';
 export class BasketService {
 
   private basketProducts: IBasket[] = [];
+
   private basketSubject = new BehaviorSubject<IBasket[]>(null);
+
   private countSubject = new BehaviorSubject<number>(0);
   private totalPriceSubject = new BehaviorSubject<number>(0);
 
@@ -31,9 +33,12 @@ export class BasketService {
 
   addProductToBasket(product: IProduct): void {
     let newProduct = new Basket(product);
-    this.basketProducts.push(newProduct);
+
+    this.basketProducts.push(Object.assign({}, newProduct));
+
     this.recalculateGeneralProductsCount();
     this.recalculateGeneralProductsPrice();
+
     this.setNextStep();
   }
 
@@ -124,6 +129,9 @@ export class BasketService {
 
   clearBasket(): void {
     this.basketProducts = [];
+
+    this.recalculateGeneralProductsCount();
+    this.recalculateGeneralProductsPrice();
 
     this.setNextStep();
   }

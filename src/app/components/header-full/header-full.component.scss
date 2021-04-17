@@ -19,8 +19,10 @@
   background-color: #22262a;
   color: #fff;
 
+  pointer-events: none;
+
   clip-path: circle(0 at 50% 50%);
-  transition: clip-path 0.5s, -webkit-clip-path 0.5s;
+  transition: all 0.5s ease;
   will-change: clip-path;
 
   .container {
@@ -41,7 +43,7 @@
   &.active {
     .header_full-wrapper {
       clip-path: circle(70.7% at 50% 50%);
-      transform: none;
+      pointer-events: auto;
     }
   }
 }

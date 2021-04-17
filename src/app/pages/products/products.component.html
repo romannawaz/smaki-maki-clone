@@ -2,19 +2,21 @@
 
 <div class="products-wrapper">
   <div class="container">
-    <div class="col-12">
+    <div class="row">
+      <div class="col-12">
 
-      <div class="block-title">
-        <h1>Доставка {{ currentCategory ? currentCategory.name.toLowerCase() : '' }} у Львові</h1>
+        <div class="block-title">
+          <h1>Доставка {{ currentCategory ? currentCategory.name.toLowerCase() : '' }} у Львові</h1>
+        </div>
+
+        <div class="tabs-toggle" *ngIf="subcategories && subcategories.length > 1">
+          <a [routerLink]="[ subcategory.urlName ]" routerLinkActive="active" *ngFor="let subcategory of subcategories"
+            class="subcategory_nav">{{ subcategory.name }}</a>
+        </div>
+
+        <router-outlet></router-outlet>
+
       </div>
-
-      <div class="tabs-toggle" *ngIf="subcategories && subcategories.length > 1">
-        <a [routerLink]="[ subcategory.urlName ]" routerLinkActive="active" *ngFor="let subcategory of subcategories"
-          class="subcategory_nav">{{ subcategory.name }}</a>
-      </div>
-
-      <router-outlet></router-outlet>
-
     </div>
   </div>
 </div>

@@ -21,6 +21,10 @@ a:hover {
   h1 {
     font-size: 45px;
     line-height: 1.2;
+
+    @media screen and (max-width: 767px) {
+      font-size: 31px;
+    }
   }
 
   &::before {
@@ -48,6 +52,11 @@ a:hover {
 
   border-bottom: 1px solid rgba(152, 152, 157, 0.5);
 
+  @media screen and (max-width: 991px) {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
   .subcategory_nav {
     position: relative;
 
@@ -62,6 +71,10 @@ a:hover {
     font-family: "Montserrat Medium";
     font-size: 17px;
     line-height: 1.2;
+
+    @media screen and (max-width: 575px) {
+      font-size: 13px;
+    }
 
     &.active {
       font-family: "Montserrat Bold";

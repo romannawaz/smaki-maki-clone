@@ -240,21 +240,40 @@ $light-red: #ed3544;
 
     transition: all 0.25s ease;
 
+    @media screen and (max-width: 565px) {
+      white-space: nowrap;
+
+      .header_call-content {
+        height: 24px;
+
+        .header_call-phone {
+          font-size: 12px;
+        }
+
+        .header_call-text {
+          font-size: 9px;
+        }
+      }
+    }
+
     &-content {
-      display: inline-block;
-      vertical-align: middle;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
 
       margin-left: 3px;
 
-      line-height: 15px;
+      font-family: "Montserrat Bold", sans-serif;
 
       .header_call-phone {
-        font-family: "Montserrat Bold", sans-serif;
         font-size: 15px;
       }
 
       .header_call-text {
-        font-family: "Montserrat Regular", sans-serif;
+        margin-top: -3px;
+
+        font-family: "Montserrat Regular";
         font-size: 13px;
       }
     }
@@ -275,6 +294,16 @@ $light-red: #ed3544;
 
   .header_icon-list {
     margin-right: 15px;
+
+    @media screen and (max-width: 1199px) {
+      margin-right: 0;
+    }
+
+    @media screen and (max-width: 565px) {
+      .header_top-right-login-item {
+        display: none;
+      }
+    }
 
     li {
       cursor: pointer;

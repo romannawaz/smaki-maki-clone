@@ -55,7 +55,7 @@
           </svg>
 
           <span class="header_call-content">
-            <b class="header_call-phone">0 800 20 40 40</b><br>
+            <b class="header_call-phone">0 800 20 40 40</b>
             <span class="header_call-text">Дзвінки безкоштовні</span>
           </span>
         </a>
@@ -63,7 +63,7 @@
 
       <div class="header_top-right">
         <ul class="header_icon-list">
-          <li>
+          <li class="header_top-right-login-item">
             <ng-container *ngIf="!userLoggedState; else elseTemplate">
               <a (click)="openSignInModal()">
                 <svg class="svg" version="1.1" width="18" height="18" viewBox="0 0 18 18"

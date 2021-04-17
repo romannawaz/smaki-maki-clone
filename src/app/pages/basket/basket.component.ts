@@ -16,6 +16,9 @@ export class BasketComponent implements OnInit {
   generalPrice: number;
   bonuses: number | string;
 
+  basketChangesSubscribe;
+  generalPriceSubscribe;
+
   constructor(
     private route: Router,
     private dialog: MatDialog,
@@ -23,16 +26,21 @@ export class BasketComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.basketService.getBasketChanges()
+    this.basketChangesSubscribe = this.basketService.getBasketChanges()
       .subscribe(basket => {
         this.basket = basket;
       });
 
-    this.basketService.getGenetalProductsPriceChanges()
+    this.generalPriceSubscribe = this.basketService.getGenetalProductsPriceChanges()
       .subscribe(price => {
         this.generalPrice = price;
         this.bonuses = (this.generalPrice * 0.05).toFixed(2);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.basketChangesSubscribe.unsubscribe();
+    this.generalPriceSubscribe.unsubscribe();
   }
 
   getBasketProducts(): void { }

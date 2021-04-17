@@ -18,6 +18,10 @@ a:hover {
 
       transition: all 0.25s ease;
 
+      @media screen and (max-width: 767px) {
+        margin-right: 10px;
+      }
+
       input {
         cursor: pointer;
 
@@ -45,6 +49,13 @@ a:hover {
         box-shadow: 0 0 15px rgb(0 0 0 / 10%);
 
         transition: all 0.25s ease;
+
+        @media screen and (max-width: 767px) {
+          padding: 5px 16px;
+
+          font-size: 13px;
+          line-height: 14px;
+        }
       }
 
       input:hover + span {
@@ -81,6 +92,30 @@ a:hover {
 
       transition: opacity 0.35s ease;
 
+      @media screen and (max-width: 575px) {
+        padding: 10px 0 0;
+      }
+
+      &:hover {
+        box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+        z-index: 1;
+
+        @media screen and (max-width: 575px) {
+          box-shadow: none;
+        }
+
+        .product_bottom {
+          .hover_bottom_info {
+            opacity: 1;
+            visibility: visible;
+            .product_description {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
+      }
+
       .product_discount {
         display: block;
 
@@ -105,6 +140,18 @@ a:hover {
 
         border-top-left-radius: 10px;
 
+        @media screen and (max-width: 767px) {
+          width: 109px;
+          line-height: 15px;
+
+          padding: 6px 50px 4px 10px;
+          height: 50px;
+
+          @media screen and (max-width: 575px) {
+            font-size: 13px;
+          }
+        }
+
         sup {
           position: relative;
           top: -0.3em;
@@ -120,6 +167,7 @@ a:hover {
             color: #fff;
           }
         }
+
         &::before {
           content: "";
 
@@ -135,6 +183,10 @@ a:hover {
 
           transform-origin: right top;
           transform: skewX(-59deg);
+
+          @media screen and (max-width: 767px) {
+            transform: skewX(-65deg);
+          }
         }
       }
 
@@ -164,6 +216,8 @@ a:hover {
       }
 
       .product_bottom {
+        position: relative;
+
         margin-top: -15px;
         margin-bottom: 0;
         padding: 0 18px;
@@ -173,7 +227,13 @@ a:hover {
         display: flex;
         flex-direction: column;
 
-        position: relative;
+        @media screen and (max-width: 1500px) {
+          margin-top: 0;
+
+          @media screen and (max-width: 575px) {
+            padding: 0;
+          }
+        }
 
         .product_weight {
           margin-bottom: 5px;
@@ -207,6 +267,15 @@ a:hover {
           text-overflow: ellipsis;
 
           transition: all 0.25s ease;
+
+          @media screen and (max-width: 575px) {
+            min-height: 36px;
+
+            @media screen and (max-width: 565px) {
+              margin-bottom: 7px;
+              font-size: 13px;
+            }
+          }
 
           &:hover {
             color: #ed3544;
@@ -267,6 +336,10 @@ a:hover {
               border: 1px solid #3aad49;
               border-radius: 28px;
 
+              @media screen and (max-width: 565px) {
+                padding: 6px 10px;
+              }
+
               &:active {
                 outline: none;
                 border: 1px solid #3aad49;
@@ -284,11 +357,12 @@ a:hover {
           position: absolute;
           top: 100%;
           left: 0;
-          z-index: 0;
+          z-index: 2;
 
           width: 100%;
 
           text-align: center;
+
           opacity: 0;
           visibility: hidden;
 
@@ -298,6 +372,19 @@ a:hover {
           background-color: #fff;
 
           border-radius: 10px;
+
+          @media screen and (max-width: 991px) {
+            position: relative;
+
+            opacity: 1;
+            visibility: visible;
+
+            box-shadow: none;
+
+            @media screen and (max-width: 575px) {
+              padding: 10px 0;
+            }
+          }
 
           .product_description {
             margin-top: auto;
@@ -310,28 +397,18 @@ a:hover {
 
             color: #98989d;
 
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+
             overflow: hidden;
+            white-space: wrap;
             text-overflow: ellipsis;
 
-            opacity: 0;
-            visibility: hidden;
-
             transition: all 0.25s ease;
-          }
-        }
-      }
 
-      &:hover {
-        box-shadow: 0 0 20px rgb(0 0 0 / 15%);
-        z-index: 2;
-
-        .product_bottom {
-          .hover_bottom_info {
-            opacity: 1;
-            visibility: visible;
-            .product_description {
-              opacity: 1;
-              visibility: visible;
+            @media screen and (max-width: 575px) {
+              text-align: left;
             }
           }
         }
@@ -349,7 +426,7 @@ a:hover {
     position: relative;
     width: 26px;
     height: 26px;
-    z-index: 3;
+    z-index: 1;
 
     border-radius: 50%;
 
@@ -361,13 +438,15 @@ a:hover {
     color: #3aad49;
     box-shadow: 0 0 15px rgb(0 0 0 / 20%);
 
+    @media screen and (min-width: 575px) {
+      &:hover {
+        background-color: #3aad49;
+        color: #fff;
+      }
+    }
+    
     &:active {
       transform: translateY(3px);
-    }
-
-    &:hover {
-      background-color: #3aad49;
-      color: #fff;
     }
 
     &:before {
@@ -398,7 +477,7 @@ a:hover {
 
   .product_count {
     position: relative;
-    z-index: 3;
+    z-index: 1;
 
     display: inline-block;
 

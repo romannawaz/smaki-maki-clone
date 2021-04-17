@@ -1,10 +1,12 @@
-.wrapper {
-  position: relative;
+@media screen and (min-width: 1200px) {
+  .row.m-xl-70 > [class*="col-"] {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
 }
 
-.row.m-xl-70 > [class*="col-"] {
-  padding-left: 35px;
-  padding-right: 35px;
+.wrapper {
+  position: relative;
 }
 
 .relative {
@@ -32,6 +34,13 @@
     left: 66px;
     bottom: -15px;
   }
+
+  @media screen and (max-width: 1199px) {
+    &-1,
+    &-2 {
+      display: none;
+    }
+  }
 }
 
 .decor-title {
@@ -46,6 +55,13 @@
   z-index: 1;
 
   font-family: "Caveat Bold";
+
+  @media screen and (max-width: 575px) {
+    left: 0;
+
+    padding-left: 23px;
+    padding-right: 23px;
+  }
 
   &:before {
     content: "";
@@ -65,6 +81,10 @@
 
   .h2 {
     font-size: 45px;
+
+    @media (max-width: 767px) {
+      font-size: 31px;
+    }
   }
 }
 
@@ -74,9 +94,20 @@
 
   margin-bottom: 25px;
 
+  @media screen and (max-width: 767px) {
+    font-size: 15px;
+  }
+
+  > *:not(:last-child) {
+    margin-bottom: 25px;
+
+    @media screen and (max-width: 991px) {
+      margin-bottom: 20px;
+    }
+  }
+
   p {
     font-family: "Montserrat Regular";
-    margin-bottom: 25px;
   }
 
   img {
@@ -86,14 +117,30 @@
     height: auto;
 
     margin: 0;
+
+    @media screen and (max-width: 767px) {
+      &:not(:first-child) {
+        margin-top: 30px;
+      }
+    }
   }
 }
 
 .quote_list {
-  margin-bottom: 35px;
-
   font-size: 17px;
   line-height: 1.6em;
+
+  @media screen and (max-width: 767px) {
+    font-size: 15px;
+
+    @media screen and (max-width: 575px) {
+      margin-top: 40px;
+    }
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 35px;
+  }
 
   li {
     position: relative;

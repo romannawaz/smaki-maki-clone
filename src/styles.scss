@@ -80,6 +80,8 @@ button {
   outline: none;
 
   background: transparent;
+
+  touch-action: manipulation;
 }
 
 a {
@@ -149,6 +151,11 @@ body {
 
   transition: all 0.25s ease;
   text-transform: uppercase;
+
+  @media screen and (max-width: 767px) {
+    min-width: 200px;
+    padding: 12px 25px;
+  }
 
   &.disabled {
     pointer-events: none;

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 
 @Injectable({
@@ -23,7 +24,19 @@ export class UserAuthService {
   }
 
   signUpUser(email: string, password: string): void {
-    this.auth.createUserWithEmailAndPassword(email, password);
+    this.auth.createUserWithEmailAndPassword(email, password)
+      .then(response => {
+        const userUID = response.user.uid;
+
+        let newUser = new User(userUID);
+        this.db.collection('/users').add({ ...newUser })
+        // .then(() => {
+
+        // })
+        // .catch(err => {
+        //   console.log(err);
+        // });
+      });
   }
 
   signInUser(email: string, password: string): void {
@@ -31,18 +44,20 @@ export class UserAuthService {
       .then(userResponse => {
         const userUID = userResponse.user.uid;
 
-        localStorage.setItem('user', JSON.stringify(userUID));
-
         this.setAuthState(true);
 
-        let newUser = new User(userUID);
+        this.getFireCloudUserByUserUID(userUID)
+          .snapshotChanges()
+          .pipe(
+            map(changes => changes.map(user => ({ id: user.payload.doc.id })))
+          )
+          .subscribe(data => {
+            localStorage.setItem('user', JSON.stringify(data[0].id));
+            this.getUserBonuses(data[0].id).then(data => console.log(data));
+          });
 
-        this.db.collection('/user').add({ ...newUser });
 
         this.router.navigateByUrl('/cabinet');
-      })
-      .catch(err => {
-        console.log(err);
       });
   }
 
@@ -57,20 +72,23 @@ export class UserAuthService {
       .catch(err => console.log(err));
   }
 
-  getFireCloudUserByUserUID(): void {
-    let userUID = JSON.parse(localStorage.getItem('user'));
+  getUserBonuses(userUID: string): Promise<number> {
+    let bonuses = this.db.collection('/users')
+      .doc(userUID)
+      .get()
+      .pipe(
+        map(changes => changes.data()['bonuses'])
+      )
+      .toPromise()
+      .then(bonuses => {
+        return bonuses;
+      });
 
-    // this.db.collection('/user', ref => ref.where('userUID', '==', userUID))
-    //   .get()
-    //   .pipe(
-    //     map(changes => ({ id: changes.id, ...changes.data() }))
-    //   )
+    return bonuses;
+  }
 
-    // this.db.collection('/user', ref => ref.where('userUID', '==', userUID))
-    //   .get()
-    //   .pipe(
-    //     map(changes => ({ id: changes.id, ...changes.data() }))
-    //   )
+  getFireCloudUserByUserUID(userUID: string): AngularFirestoreCollection<any> {
+    return this.db.collection('/users', ref => ref.where('userUID', '==', userUID));
   }
 
   getStateChanges(): Observable<boolean> {

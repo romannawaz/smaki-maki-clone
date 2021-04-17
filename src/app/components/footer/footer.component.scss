@@ -1,6 +1,8 @@
 .wrapper {
   margin-top: 80px;
 
+  overflow: hidden;
+
   @media screen and (max-width: 991px) {
     margin-top: 10px;
   }
@@ -139,6 +141,28 @@
 
   color: #fff;
 
+  @media screen and (max-width: 1199px) {
+    padding: 40px 20px;
+
+    @media screen and (max-width: 991px) {
+      margin-left: -60px;
+      margin-right: -60px;
+
+      padding: 40px 80px;
+
+      border-radius: 0;
+
+      @media screen and (max-width: 575px) {
+        margin-left: -20px;
+        margin-right: -20px;
+
+        padding: 40px 20px;
+
+        border-radius: 0;
+      }
+    }
+  }
+
   .decor_title {
     display: block;
 
@@ -151,6 +175,10 @@
     padding: 0 20px;
 
     text-align: center;
+
+    @media screen and (max-width: 575px) {
+      padding: 0;
+    }
 
     &::before {
       content: "";
@@ -175,6 +203,10 @@
 
       font-size: 45px;
       line-height: 1.2;
+
+      @media screen and (max-width: 767px) {
+        font-size: 31px;
+      }
     }
   }
 
@@ -192,12 +224,14 @@
 
     text-transform: uppercase;
     line-height: 1.2em;
-  }
 
-  @media screen and (max-width: 991px) {
-    // margin-left: -60px;
-    // margin-right: -60px;
-    padding: 40px 80px;
+    @media screen and (max-width: 768px) {
+      text-align: center;
+
+      @media screen and (max-width: 575px) {
+        margin-right: 20px;
+      }
+    }
   }
 }
 
@@ -208,6 +242,10 @@
 
   width: 320px;
   margin: 30px 0 0;
+
+  @media screen and (max-width: 575px) {
+    width: 100%;
+  }
 
   .input-wrapper {
     position: relative;
@@ -347,6 +385,10 @@
     @media screen and (max-width: 1600px) {
       top: -44px;
       right: 130px;
+
+      @media screen and (max-width: 767px) {
+        right: 17px;
+      }
     }
   }
 

@@ -29,6 +29,7 @@ export class UserAuthService {
         const userUID = response.user.uid;
 
         let newUser = new User(userUID);
+
         this.db.collection('/users').add({ ...newUser })
         // .then(() => {
 
@@ -53,7 +54,7 @@ export class UserAuthService {
           )
           .subscribe(data => {
             localStorage.setItem('user', JSON.stringify(data[0].id));
-            this.getUserBonuses(data[0].id).then(data => console.log(data));
+            // this.getUserBonuses().then(data => console.log(data));
           });
 
 
@@ -72,19 +73,24 @@ export class UserAuthService {
       .catch(err => console.log(err));
   }
 
-  getUserBonuses(userUID: string): Promise<number> {
-    let bonuses = this.db.collection('/users')
+  getUserBonuses(): Promise<number> {
+    let userUID = JSON.parse(localStorage.getItem('user'));
+
+    return this.db.collection('/users')
       .doc(userUID)
       .get()
       .pipe(
         map(changes => changes.data()['bonuses'])
       )
-      .toPromise()
-      .then(bonuses => {
-        return bonuses;
-      });
+      .toPromise();
+  }
 
-    return bonuses;
+  setUserBonuses(bonuses: string): void {
+    let userUID = JSON.parse(localStorage.getItem('user'));
+
+    this.getUserBonuses().then(currentBonuses => {
+      this.db.collection('/users').doc(userUID).update({ bonuses: +currentBonuses + +bonuses });
+    });
   }
 
   getFireCloudUserByUserUID(userUID: string): AngularFirestoreCollection<any> {

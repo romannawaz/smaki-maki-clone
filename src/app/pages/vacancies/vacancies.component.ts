@@ -3,11 +3,8 @@ import { Component, OnInit } from '@angular/core';
 // Interfaces
 import { IVacancy } from 'src/app/shared/interfaces/vacancy.interface';
 
-// Services
-import { VacancyService } from 'src/app/shared/services/vacancy.service';
-
 // rxjs operators
-import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vacancies',
@@ -20,21 +17,27 @@ export class VacanciesComponent implements OnInit {
   vacancies: IVacancy[] = [];
 
   constructor(
-    private vacancyService: VacancyService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getVacancies();
+    // this.getVacancies();
+
+    this.route.data.subscribe(data => {
+      data['vacancies'].subscribe((data: IVacancy[]) => {
+        this.vacancies = data;
+      });
+    });
   }
 
-  getVacancies(): void {
-    this.vacancyService.getFireCloudVacancies()
-      .snapshotChanges()
-      .pipe(
-        map(changes => changes.map(vac => ({ id: vac.payload.doc.id, ...vac.payload.doc.data() })))
-      )
-      .subscribe(data => {
-        this.vacancies = data;
-      })
-  }
+  // getVacancies(): void {
+  //   this.vacancyService.getFireCloudVacancies()
+  //     .snapshotChanges()
+  //     .pipe(
+  //       map(changes => changes.map(vac => ({ id: vac.payload.doc.id, ...vac.payload.doc.data() })))
+  //     )
+  //     .subscribe(data => {
+  //       this.vacancies = data;
+  //     })
+  // }
 }

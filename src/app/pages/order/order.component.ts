@@ -5,6 +5,7 @@ import { BasketService } from 'src/app/shared/services/basket.service';
 import { IBasket } from 'src/app/shared/interfaces/basket.interface';
 import { Order } from 'src/app/shared/models/order.model';
 import { OrderService } from 'src/app/shared/services/order.service';
+import { UserAuthService } from 'src/app/shared/services/auth/user-auth.service';
 
 @Component({
   selector: 'app-order',
@@ -30,6 +31,7 @@ export class OrderComponent implements OnInit {
   totalPrice: number;
 
   constructor(
+    private userService: UserAuthService,
     private basketService: BasketService,
     private orderService: OrderService
   ) { }
@@ -98,45 +100,48 @@ export class OrderComponent implements OnInit {
 
     console.log(newOrder);
 
-    this.orderService.addFireCloudOrder(newOrder)
-      .then(() => {
-        let productsNames = this.basket.map(
-          product => {
-            return `-${product.product.name}: ${product.count} шт.`;
-          }
-        );
+    this.userService.setUserBonuses((this.totalPrice * 0.05).toFixed(2))
 
-        let string =
-        `
-*You have a new order!*
+    //     this.orderService.addFireCloudOrder(newOrder)
+    //       .then(() => {
+    //         let productsNames = this.basket.map(
+    //           product => {
+    //             return `-${product.product.name}: ${product.count} шт.`;
+    //           }
+    //         );
 
-*Products:*
-${productsNames.join('\n')}
+    //         let string =
+    //           `
+    // *You have a new order!*
 
-*Contacts:*
-_Name_: ${this.userName}
-_Email_: ${this.userEmail}
+    // *Products:*
+    // ${productsNames.join('\n')}
 
-*Adress:*
-_Street_: ${this.street}
-_House_: ${this.house}
-_Apartment_: ${this.apartment}
-_Entrance_: ${this.entrance}
-_Floor_: ${this.floor}
+    // *Contacts:*
+    // _Name_: ${this.userName}
+    // _Email_: ${this.userEmail}
 
-*Comment:*
-${this.comment}
-`;
+    // *Adress:*
+    // _Street_: ${this.street}
+    // _House_: ${this.house}
+    // _Apartment_: ${this.apartment}
+    // _Entrance_: ${this.entrance}
+    // _Floor_: ${this.floor}
 
-        let urlString = encodeURIComponent(string);
+    // *Comment:*
+    // ${this.comment}
+    // `;
+    //         console.log(/* this.userService.getUserBonuses(),  */this.userService.setUserBonuses((this.totalPrice * 0.05).toFixed(2)), 'bonuses');
 
-        fetch(`https://api.telegram.org/bot1678260692:AAGF-vwtzelA3NkudfHtt2H_4HYRLmVBxvI/sendMessage?chat_id=-1001207488424&text=${urlString}&parse_mode=markdown`, {
-          method: 'POST'
-        });
+    //         let urlString = encodeURIComponent(string);
 
-        this.basketService.clearBasket();
-        this.resetForm();
-      });
+    //         fetch(`https://api.telegram.org/bot1678260692:AAGF-vwtzelA3NkudfHtt2H_4HYRLmVBxvI/sendMessage?chat_id=-1001207488424&text=${urlString}&parse_mode=markdown`, {
+    //           method: 'POST'
+    //         });
+
+    //         this.basketService.clearBasket();
+    //         this.resetForm();
+    //       });
 
   }
 

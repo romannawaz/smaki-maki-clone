@@ -14,6 +14,7 @@ import { environment } from '../environments/environment.prod';
 import { HeaderTopComponent } from './components/header-top/header-top.component';
 import { HeaderFullComponent } from './components/header-full/header-full.component';
 import { HeaderSideComponent } from './components/header-side/header-side.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 // Pages
 import { AboutComponent } from './pages/about/about.component';
@@ -64,7 +65,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FooterComponent } from './components/footer/footer.component';
+
+// Directive
 import { ScrollDirective } from './shared/directives/scroll.directive';
 
 // Angular Google Maps
@@ -74,6 +76,9 @@ import { SwiperModule } from 'swiper/angular';
 
 // Pagination
 import { NgxPaginationModule } from 'ngx-pagination';
+
+// Resolvers
+import { VacanciesResolver } from './shared/resolves/vacancies.resolver';
 
 @NgModule({
   declarations: [
@@ -132,7 +137,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SwiperModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    VacanciesResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

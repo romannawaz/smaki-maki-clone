@@ -31,6 +31,7 @@ import { AdminDiscountComponent } from './admin/admin-discount/admin-discount.co
 import { AdminGuard } from './shared/guards/admin.guard';
 import { UserGuard } from './shared/guards/user.guard';
 
+// Resolver
 import { VacanciesResolver } from './shared/resolves/vacancies.resolver';
 
 const routes: Routes = [
